@@ -1,0 +1,22 @@
+<?php 
+include('config.php');
+$db=$conn;
+
+ echo $id=$_POST['id'];
+
+
+echo $col ="DELETE FROM `birth_history` WHERE id='$id'"; 
+if(mysqli_query($db,$col))
+{
+    echo("successfully deleted ");
+}
+else{
+    echo("not able to delete");
+}
+
+
+mysqli_close($db);
+
+?>
+
+?>

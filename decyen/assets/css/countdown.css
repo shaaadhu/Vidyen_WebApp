@@ -1,0 +1,93 @@
+.countbackground{ 
+	background: #ff5e00; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#f7a42b, #ff5e00); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f7a42b, #ff5e00); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f7a42b, #ff5e00); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f7a42b, #ff5e00); /* Standard syntax (must be last) */
+	height:120px;
+	overflow:hidden;}
+	
+.countbackground2{ 
+	background: #0c62c1; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#2991ef, #0c62c1); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#2991ef, #0c62c1); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#2991ef, #0c62c1); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#2991ef, #0c62c1); /* Standard syntax (must be last) */
+	height:120px;
+	overflow:hidden;}
+
+.countbackground2 li{
+	display:inline-block; text-align: center; text-transform:uppercase; color:#fff; font-weight:500; margin-top: 10px; padding:10px;
+}
+
+.countbackground2 li i {
+    text-align: center;
+    font-size: 42px;
+    padding: 10px;
+    vertical-align: text-top;
+}	
+	
+.countbackground3{ 
+	background: #20b700; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#52e02f, #20b700); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#52e02f, #20b700); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#52e02f, #20b700); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#52e02f, #20b700); /* Standard syntax (must be last) */
+	height:120px;
+	overflow:hidden;}
+
+	
+.countbackground3 h2{
+	font-family: 'Oswald', sans-serif;
+	text-transform:uppercase;
+	text-align:center;
+	color:#FFF;
+	line-height:75px;
+}
+
+
+.countbackground button{
+	text-align:center;
+	margin-top:10px;
+	border-radius: 0;
+	color:#fff;
+	font-weight:500; 
+	transition: all 0.5s ease 0s;
+	background:none;
+	text-transform:uppercase;
+	font-family: 'Oswald', sans-serif;
+	font-size:24px;
+}
+
+.countbackground2 button:hover { color: #FFF; background: #000;}
+
+.countbackground2 ul li:hover{color: #FFF; background: #000; transition: all 0.3s ease 0s;}
+
+
+@media screen and (max-width: 992px) {
+.countbackground{ 
+	height:auto;
+}
+
+.highlight-news{
+	display:none;
+}
+
+}
+
+@media screen and (max-width: 315px) {
+#ctd{
+	display:none;
+}
+
+}
+
+
+
+
+
+
+
+
+
+

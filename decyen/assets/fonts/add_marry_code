@@ -1,0 +1,33 @@
+<?php 
+include('config.php');
+$db=$conn;
+
+ $id=$_POST['id'];
+ $family_id=$_POST['family_id'];
+ $family_followup_code=$_POST['family_followup_code'];
+ $marryname=$_POST['marryname'];
+ $marryage=$_POST['marryage'];
+ $marrygender=$_POST['marrygender'];
+ $marryrel=$_POST['marryrel'];
+ $created_by=$_POST['created_by'];
+ $created_on=$_POST['created_on'];
+  
+$modifydate=date("d/m/y");
+$modifyby="student";
+
+
+ $col ="INSERT INTO `marriage_history`( `family_id`,`family_followup_code`, `marryname`, `marryage`, `marrygender`, `marryrel`,`created_by`, `created_on`) VALUES ('$id','$family_id','$family_followup_code','$marryname','$marryage','$marrygender','$marryrel','$created_by,'$created_on')"; 
+if(mysqli_query($db,$col))
+{
+    echo("successfully added in db");
+}
+else{
+    echo("not able to add in database");
+}
+
+
+mysqli_close($db);
+
+?>
+
+?>

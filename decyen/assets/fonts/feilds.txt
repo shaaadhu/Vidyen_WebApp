@@ -1,0 +1,252 @@
+->individual details<-
+	id
+	family_id
+	iname
+	iage
+	igender
+	imobile
+	iadhaar
+	idob
+	iedu
+	iocc
+	irel
+	idemo
+	istudent 
+	ischool
+	istand
+	underfive [YES/NO]
+	immu
+	iheight
+	iweight
+	ibsa
+	ialco
+	ismokel
+	ismoke
+	ibg
+	created_by
+	created_on
+	modified_by
+	modified_on
+	status 
+	flag
+
+
+individual followup
+	id
+	invidual_id
+	family_id
+	isystolic
+	idiastolic
+	ht
+	isugar
+	dm
+	iusugar
+	iupro
+	iocav
+	ioulc
+	iohyg
+	iheamo
+	idhab
+	idiet
+	ichronic
+	iacute
+	iflu
+	imaleria
+	idengue
+	ituber
+	iteeth
+	iteeth_other
+	iclean
+	imat
+	ipaste
+	ichangeb
+	oralhygine
+	imouth
+	imcheck
+	iaccess
+	ifactor
+	iaction
+	created_by
+	created_on
+	modified_by
+	modified_on
+	status 
+	flag
+
+	VACINATION 
+		id
+		individual_id
+		family_id
+		vacbirth
+		vac6w
+		vac10w
+		vac14w
+		vac9m
+		vac15m
+		vac18m
+		vac5y
+		created_by
+		created_on
+		modified_by
+		modified_on
+		status 
+		flag
+**********************************family*********************************
+->Family_Register<-
+	id
+	namehof
+	houseno
+	vname
+	fulladd
+	age
+	gender
+	mobnum
+	lroom
+	rarea
+	fmembers
+	ocrowd
+	adhaar
+	rtype	
+	lonlat
+	mobnos
+	foldate
+	created_by
+	created_on
+	modified_by
+	modified_on
+	status 
+	flag
+
+
+family_followup
+	id
+	family_id
+	date_of_created
+	fprob
+	nohealth  /*health_utilization (Nil / Govt)
+	dcost
+	indcost
+	scheme
+	waction  /*approached (Nil / some text)
+	vitalevent
+	observe
+	dov
+	created_by
+	created_on
+	modified_by
+	modified_on
+	status 
+	flag
+
+	birth history
+		id
+		family_id
+		cbdate
+		cbname
+		cbgender
+		created_by
+		created_on
+		modified_by
+		modified_on
+		status 
+		flag
+
+	marriage history
+		id
+		family_id
+		marryname
+		marryage
+		marrygender
+		marryrel
+		created_by
+		created_on
+		modified_by
+		modified_on
+		status 
+		flag
+
+	death history
+		id
+		family_id
+		ddate
+		dname
+		dage
+		dgender
+		dcause
+		created_by
+		created_on
+		modified_by
+		modified_on
+		status 
+		flag
+
+
+************************ end family ****************************
+
+->Add Mentor<-
+	id 
+	mentor_id
+	mname
+	memail
+	mconnum
+	mdept
+	mdesign
+	mdoj
+	mempid
+	mrole
+	muser
+	mpasswd
+	created_by
+	created_on
+	modified_by
+	modified_on
+	status 
+	flag
+
+->Add Student<-
+id 
+student_id
+	sname
+	semail
+	suser
+	sconnum
+	colname
+	regnum
+	corname
+	addyear
+	spasswd
+	created by
+	created on
+	modified by
+	modified on
+	status 
+	flag
+	
+ login 
+    id , user_id, username, password, email, usertype
+    created_by
+	created_on
+	modified_by
+	modified_on
+	status [if = 1==yes // 0 = no]
+	flag
+
+
+    if (health_utilization =='')
+		{
+		$health_utilization = 'nil'
+		}
+		elseif(health_utilization != ''){
+		$health_utilization = '$_'
+		}
+
+chronic_illness
+
+ if (chronic_illness =='nil')
+		{
+		<option button no selected>
+		}
+		else(health_utilization != 'nil'){
+		<option button yes selected>
+		<text area dispaly the values>
+		}

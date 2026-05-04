@@ -1,0 +1,59 @@
+<?php 
+include('config.php');
+$db=$conn;
+        if(isset($_GET['id'])){
+
+          $id=$_GET['id'];
+          $query="SELECT * FROM marriage_history WHERE id='$id'";
+          $sqlcon=mysqli_query($db,$query);
+          while($rows_marry=mysqli_fetch_assoc($sqlcon)){
+          ?>
+          
+                                      <div class="row">
+                                        <div class="col-md-4">
+                                          <input type="hidden" value="<?php echo $rows_marry['id'];?>">
+                                          <label class="form-label">Name</label>
+                                          <input type="date" class="form-control" name="marryname" id="marryname" value="<?php echo $rows_marry['marryname'];?>">
+                                        </div>
+                                        <div class="col-md-4">
+                                          <label class="form-label">Age</label>
+                                          <input type="text" class="form-control" name="marryage" id="marryage" value="<?php echo $rows_marry['marryage'];?>">
+                                        </div>
+                                        <div class="col-md-4">
+                                          <label class="form-label">Gender</label>
+                                          <select class="form-control form-control" name="marrygender" id="marrygender">
+                                          <option value="0">Choose Gender</option>
+                                          <option value="male"<?php if($rows_marry['marrygender']=='male') echo 'selected'; ?>>Male</option>
+                                          <option value="female"<?php if($rows_marry['marrygender']=='female') echo 'selected'; ?>>Female</option>
+                                          <option value="others"<?php if($rows_marry['marrygender']=='others') echo 'selected'; ?>>Others</option>
+                                          </select>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                          <label class="form-label">Relation with HOF</label>
+                                          <input type="text" class="form-control" name="marryrel" id="marryrel" value="<?php echo $rows_marry['marryrel'];?>">
+                                          
+                                        </div>
+                                      </div> 
+                                    
+                                      <div class="modal-footer mt-3">
+                                        <button type="button" id="close_marry" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" id="update_marry" data-id="<?php echo $rows_marry['id'];?>" >Save</button>
+                                      </div>
+                                   
+                                    <?php
+                                  }
+
+      }
+
+     ?>
+     <script type="text/javascript">
+        var closebtn=document.getElementById('close_marry');
+        closebtn.onclick=function() {
+        location.reload();
+    }
+     </script>
+
+
+
+              
