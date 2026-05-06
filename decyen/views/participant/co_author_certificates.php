@@ -18,20 +18,19 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-
                             <tbody>
-
+                                <?php foreach ($coAuthors as $author): ?>
                                 <tr>
-                                    <td><?php echo $full_name; ?></td>
+                                    <td><?php echo htmlspecialchars($author['full_name']); ?></td>
                                     <td>Certificate for co-authors</td>
                                     <td>
-                                        <a href="index.php?controller=certificate&action=downloadGenerated&type=co_author_certificate&name=<?php echo urlencode($full_name); ?>"
+                                        <a href="index.php?controller=certificate&action=downloadGenerated&type=co_author_certificate&name=<?php echo urlencode($author['full_name']); ?>"
                                             class="btn btn-success btn-sm">
                                             <i class="fa-solid fa-download"></i> Download
                                         </a>
                                     </td>
                                 </tr>
-                            
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -40,4 +39,4 @@
             </div>
         </div>
     </div>
-</div>    
+</div>

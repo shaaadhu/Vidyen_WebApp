@@ -15,7 +15,10 @@
       <span id="page-number"></span>
       <button id="next-button" class="btn btn-primary">Next</button>
     </div> -->
- <div class="row mt-5">
+     <center>
+      <h4 class="mb-4"><span class="text-primary"> Coming Soon</span></h1>
+    </center>
+ <!-- <div class="row mt-5">
     	<div class="col-lg-3 ">
     	</div>
       <div class="col-lg-6 ">
@@ -95,7 +98,7 @@
     	</div>
     </div> 
   </div>
-</div>
+</div> -->
 <!-- About End -->
 
 

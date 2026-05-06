@@ -434,38 +434,65 @@ window.location.assign('index.php?controller=participant&action=abstract_submiss
            $userId = $_SESSION['user_id'];
            $model = new ParticipantModel;
            $coauthor_result = $model->coAuthorDetails($userId);
-            if(mysqli_num_rows($coauthor_result) > 0){
-                while ($row = mysqli_fetch_assoc($coauthor_result)){
 
-                    $first_names  = explode(',', $row['first_name']);
-                    $middle_names = explode(',', $row['middle_name']);
-                    $last_names   = explode(',', $row['last_name']);
+            // if(mysqli_num_rows($coauthor_result) > 0){
+            //     while ($row = mysqli_fetch_assoc($coauthor_result)){
 
-                    // Remove first element (Present Author)
-                    array_shift($first_names);
-                    array_shift($middle_names);
-                    array_shift($last_names);
+            //         $first_names  = explode(',', $row['first_name']);
+            //         $middle_names = explode(',', $row['middle_name']);
+            //         $last_names   = explode(',', $row['last_name']);
 
-                    // Get count of co-authors
-                    $count = count($first_names);
+            //         // Remove first element (Present Author)
+            //         array_shift($first_names);
+            //         array_shift($middle_names);
+            //         array_shift($last_names);
 
-                    for ($i = 0; $i < $count; $i++){
+            //         // Get count of co-authors
+            //         $count = count($first_names);
+
+            //         for ($i = 0; $i < $count; $i++){
 
 
-                        $fname = trim($first_names[$i]);
-                        $mname = trim($middle_names[$i]);
-                        $lname = trim($last_names[$i]);
+            //             $fname = trim($first_names[$i]);
+            //             $mname = trim($middle_names[$i]);
+            //             $lname = trim($last_names[$i]);
 
-                        $full_name = 'Dr.'. ' ' . $fname . ' ' . $mname . ' ' . $lname;
+                        
+            //             $full_name = 'Dr.'. ' ' . $fname . ' ' . $mname . ' ' . $lname;
 
-                    }
+            //         }
 
             
 
 
-                }
+            //     }
 
-            } 
+            // }
+            
+            $coAuthors = [];
+        if ($coauthor_result) {
+            while ($row = mysqli_fetch_assoc($coauthor_result)) {
+                $firstNames  = array_map('trim', explode(',', $row['first_name']));
+                $middleNames = array_map('trim', explode(',', $row['middle_name']));
+                $lastNames   = array_map('trim', explode(',', $row['last_name']));
+
+                // Remove first element (main/presenting author)
+                array_shift($firstNames);
+                array_shift($middleNames);
+                array_shift($lastNames);
+
+                $count = count($firstNames);
+                for ($i = 0; $i < $count; $i++) {
+                    $fname = $firstNames[$i] ?? '';
+                    $mname = $middleNames[$i] ?? '';
+                    $lname = $lastNames[$i] ?? '';
+                    if ($fname !== '') {
+                        $fullName = trim('Dr. ' . $fname . ' ' . $mname . ' ' . $lname);
+                        $coAuthors[] = ['full_name' => $fullName];
+                    }
+                }
+            }
+        }
 
 
             

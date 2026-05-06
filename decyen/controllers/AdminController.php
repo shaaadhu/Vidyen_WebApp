@@ -791,7 +791,16 @@ class AdminController
             'mindful_map' => 'Pre-Conference Workshop - Mindful Map',
             'sage' => 'Pre-Conference SAGE',
             'itlm' => 'Pre-Conference Interactive Teaching Learning Methods',
-            'workshop_bridging' => 'Workshop Course - Bridging Mind Building Care'
+            'workshop_bridging' => 'Workshop Course - Bridging Mind Building Care',
+            'workshop_proms_prems' => 'Enhancing Health Care Using PROMs, PREMs, and Experiences in Dentistry- Workshop',
+            'workshop_microteaching' => 'Microteaching Workshop',
+            'first_place_paper' => '1st Place Paper Award',
+            'second_place_paper' => '2nd Place Paper Award',
+            'first_place_poster' => '1st Place Poster Award',
+            'second_place_poster' => '2nd Place Poster Award',
+            'first_place_yenvision' => '1st Place YenVision Award',
+            'second_place_yenvision' => '2nd Place YenVision Award',
+            'co_author_certificate' => 'Co-Author certificate'
         ];
 
         // require_once __DIR__ . '/../views/admin/generated_certificates.php';

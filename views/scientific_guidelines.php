@@ -2,7 +2,7 @@
 <div class="container-fluid py-5 mb-2">
   <div class="container">
     <center>
-      <h1 class="mb-4">VIDYEN Conference 2025 –<span class="text-primary"> Scientific Guidelines</span></h1>
+      <h1 class="mb-4">VIDYEN Conference 2026 –<span class="text-primary"> Scientific Guidelines</span></h1>
     </center>
     <!-- <div class="d-flex justify-content-center">
     	<div id="pdf-container"></div>

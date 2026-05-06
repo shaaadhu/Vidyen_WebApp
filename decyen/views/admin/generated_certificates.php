@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <?php foreach ($certTypes as $key => $name): ?>
-                            <div class="col-md-2">
+                            <div class="col-md-2 mt-1 text-center">
                                 <div class="card bg-info text-white p-2">
                                     <h6 class="small"><?= substr($name, 0, 15) ?>...</h6>
                                     <h4><?= $stats[$key] ?? 0 ?></h4>

@@ -136,7 +136,7 @@
 
     <?php foreach ($sections as $section): ?>
     <div class="row mt-5">
-      <div class="col-lg-12 pt-3 pb-lg-3">
+      <!-- <div class="col-lg-12 pt-3 pb-lg-3">
         <h1 class="section-title"><?php echo $section['title']; ?></h1>
       </div>
       <div class="col-lg-12">
@@ -162,9 +162,13 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-      </div>
+      </div> -->
+       
     </div>
     <?php endforeach; ?>
+    <center>
+      <h4 class="mb-4"><span class="text-primary"> Coming Soon</span></h1>
+    </center>
 
   </div>
 </div>

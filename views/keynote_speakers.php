@@ -17,8 +17,10 @@
       <h1 class="mb-4">VIDYEN Conference 2025 –<span class="text-primary"> Keynote Speakers</span></h1>
     </center>
     <!-- <h1 class="text-center text-info blink mt-5">Will Be Updated Soon</h1> -->
-   
- <div class="row mt-5">
+    <center>
+      <h4 class="mb-4"><span class="text-primary"> Coming Soon</span></h1>
+    </center>
+    <!-- <div class="row mt-5">
       <div class="col-lg-3 ">
       </div>
       <div class="col-lg-6 ">
@@ -46,20 +48,12 @@
       </div>
       <div class="col-lg-3 ">
       </div>
-    </div>
+  </div> -->
 
-    <!-- <div class="row ">
-      <div class="col-lg-3 ">
-      </div>
-      <div class="col-lg-6 ">
-       <img class="img-fluid rounded w-100 mb-4" src="<?= ROOT ?>/assets/images/brochure/keynote4.jpeg" alt="Image4">
-      </div>
-      <div class="col-lg-3 ">
-      </div>
-    </div> -->
+    
 
   </div>
-</div>
+  </div>
 <!-- About End -->
 
 
