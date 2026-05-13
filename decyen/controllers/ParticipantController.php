@@ -469,7 +469,7 @@ window.location.assign('index.php?controller=participant&action=abstract_submiss
 
             // }
             
-            $coAuthors = [];
+        $coAuthors = [];
         if ($coauthor_result) {
             while ($row = mysqli_fetch_assoc($coauthor_result)) {
                 $firstNames  = array_map('trim', explode(',', $row['first_name']));

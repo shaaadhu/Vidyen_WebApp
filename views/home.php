@@ -115,7 +115,7 @@ for your active, energetic participation and support.</p>
                         <div class="team d-flex flex-column text-center rounded overflow-hidden">
                             <div class="position-relative">
                                 <div class="team-img">
-                                    <img class="img-fluid" style="width: 70%;" src="<?= ROOT ?>/assets/images/patrons/Dr Aswini Dutt.R- Registrar.jpg" alt="">
+                                    <img class="img-fluid" style="width: 70%;" src="<?= ROOT ?>/assets/images/patrons/Dr Aswini Dutt.R- Registrar.webp" alt="">
                                 </div>
                                 <div class="team-social d-flex flex-column align-items-center justify-content-center bg-primary">
                                 </div>

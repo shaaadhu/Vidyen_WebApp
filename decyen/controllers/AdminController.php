@@ -411,10 +411,6 @@ class AdminController
     // assign reviewer to abstract submission by admin
     public function assignAbstractReviewer()
     {
-        // 1. Authorization Check
-        //  if (isset($_SESSION['user_id']) && ($_SESSION['usertype'] != 'admin' || ($_SESSION['user_id'] == ''))) {
-        //     require_once __DIR__ . '/../views/login.php';
-        // }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $participant_id = $_POST['participant_id'] ?? '';
@@ -699,15 +695,7 @@ class AdminController
     // AJAX: Check if certificate already generated for a user and type
     public function checkStatusCertificate()
     {
-        // 1. Authorization check
-        // if (!isset($_SESSION['user_id']) || $_SESSION['usertype'] != 'admin') {
-        //     http_response_code(403);
-        //     echo json_encode(['error' => 'Unauthorized']);
-        //     return;
-        // }
-
-        // 2. Input validation
-        // session_start();
+      
 
         header('Content-Type: application/json'); 
         $user_id = $_GET['user'] ?? '';

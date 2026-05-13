@@ -19,7 +19,7 @@
     	<div class="col-lg-3 ">
     	</div>
       <div class="col-lg-6 ">
-       <img class="img-fluid rounded w-100 mb-4" src="<?= ROOT ?>/assets/images/brochure/Symposium 4.0_page-0001.jpg" alt="Image1">
+       <img class="img-fluid rounded w-100 mb-4" src="<?= ROOT ?>/assets/images/brochure/Symposium 4.0_page-0001.webp" alt="Image1">
       </div>
       <div class="col-lg-3 ">
     	</div>
@@ -29,7 +29,7 @@
     	<div class="col-lg-3 ">
     	</div>
       <div class="col-lg-6 ">
-       <img class="img-fluid rounded w-100 mb-4" src="<?= ROOT ?>/assets/images/brochure/Symposium 4.0_page-0002.jpg" alt="Image2">
+       <img class="img-fluid rounded w-100 mb-4" src="<?= ROOT ?>/assets/images/brochure/Symposium 4.0_page-0002.webp" alt="Image2">
       </div>
       <div class="col-lg-3 ">
     	</div>
@@ -39,7 +39,7 @@
     	<div class="col-lg-3 ">
     	</div>
       <div class="col-lg-6 ">
-       <img class="img-fluid rounded w-100 mb-4" src="<?= ROOT ?>/assets/images/brochure/Symposium 4.0_page-0003.jpg" alt="Image3">
+       <img class="img-fluid rounded w-100 mb-4" src="<?= ROOT ?>/assets/images/brochure/Symposium 4.0_page-0003.webp" alt="Image3">
       </div>
       <div class="col-lg-3 ">
     	</div>
@@ -49,7 +49,7 @@
     	<div class="col-lg-3 ">
     	</div>
       <div class="col-lg-6 ">
-       <img class="img-fluid rounded w-100 mb-4" src="<?= ROOT ?>/assets/images/brochure/Symposium 4.0_page-0004.jpg" alt="Image4">
+       <img class="img-fluid rounded w-100 mb-4" src="<?= ROOT ?>/assets/images/brochure/Symposium 4.0_page-0004.webp" alt="Image4">
       </div>
       <div class="col-lg-3 ">
     	</div>

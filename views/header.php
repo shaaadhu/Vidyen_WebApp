@@ -2,19 +2,24 @@
 <html lang="en">
 
 <head>
-     <meta charset="utf-8">
+    <meta charset="utf-8">
     <title>Virtual International Dental Education Conference | Yenepoya Dental Education Unit</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="VIDYEN | Mangalore | Karnataka" name="keywords">    
-    <meta content="The Yenepoya Dental Education Unit, Yenepoya Dental College, Yenepoya (Deemed to be University), Mangaluru is delighted to invite you to the 3rd Virtual International Dental Education Conference (VIDYEN). This conference will be held from 28th to 30th October 2025. The Theme for the conference is ‘Beyond Boundaries: Hybrid Learning Models in Dental Education’. The conference intends to showcase their innovations to advance Dental education and practice for overall improvement of dental education and in general to improve quality and costs of Oral health care, Oral health equity, and an empowered Oral Health workforce. We cordially welcome you all to this conference and look forward for your active, energetic participation and support." name="description">
-    <meta content="Yenepoya Deemed University  | University Road | mangalore | karnataka | Yenepoya Medical College hospital | yenepoya technology incubator" name="location"> 
+    <meta content="VIDYEN | Mangalore | Karnataka" name="keywords">
+    <meta
+        content="The Yenepoya Dental Education Unit, Yenepoya Dental College, Yenepoya (Deemed to be University), Mangaluru is delighted to invite you to the 3rd Virtual International Dental Education Conference (VIDYEN). This conference will be held from 28th to 30th October 2025. The Theme for the conference is ‘Beyond Boundaries: Hybrid Learning Models in Dental Education’. The conference intends to showcase their innovations to advance Dental education and practice for overall improvement of dental education and in general to improve quality and costs of Oral health care, Oral health equity, and an empowered Oral Health workforce. We cordially welcome you all to this conference and look forward for your active, energetic participation and support."
+        name="description">
+    <meta
+        content="Yenepoya Deemed University  | University Road | mangalore | karnataka | Yenepoya Medical College hospital | yenepoya technology incubator"
+        name="location">
 
     <!-- Favicon -->
     <link href="<?= ROOT ?>/assets/images/favicon.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -26,16 +31,16 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="<?= ROOT ?>/assets/css/style.css?v=1" rel="stylesheet">
     <style type="text/css">
-        .custom-nav {
-            position: relative;
-            z-index: 1000;
-        }
+    .custom-nav {
+        position: relative;
+        z-index: 1000;
+    }
 
-        .fixed-nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-        }
+    .fixed-nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
     </style>
 
 </head>
@@ -63,7 +68,8 @@
                     </div>
                     <div class="col-lg-5 text-right">
                         <div class="d-inline-flex align-items-center pr-2">
-                            <a class="text-white p-2" target="_blank" href="https://www.facebook.com/profile.php?id=100093027516526">
+                            <a class="text-white p-2" target="_blank"
+                                href="https://www.facebook.com/profile.php?id=100093027516526">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                             <a class="text-white p-2" target="_blank" href="https://twitter.com/VIDYENC">
@@ -92,34 +98,60 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-            <div class="navbar-nav mr-auto py-0"> <a href="index.php?controller=home&action=home" class="nav-item nav-link active">Home</a>
+            <div class="navbar-nav mr-auto py-0"> <a href="index.php?controller=home&action=home"
+                    class="nav-item nav-link active">Home</a>
                 <a href="index.php?controller=home&action=about" class="nav-item nav-link">About</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Committee</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a href="index.php?controller=home&action=organizing_committee" class="dropdown-item">Organizing Committee</a>
-                        <a href="index.php?controller=home&action=advisory_committee" class="dropdown-item">Advisory Committee</a>
+                        <a href="index.php?controller=home&action=organizing_committee" class="dropdown-item">Organizing
+                            Committee</a>
+                        <a href="index.php?controller=home&action=advisory_committee" class="dropdown-item">Advisory
+                            Committee</a>
                     </div>
                 </div>
                 <a href="index.php?controller=home&action=virtual_booth" class="nav-item nav-link">Virtual Booth</a>
-                <a href="index.php?controller=home&action=theme_sub_theme" class="nav-item nav-link">Theme & Sub-themes</a>
+                <a href="index.php?controller=home&action=theme_sub_theme" class="nav-item nav-link">Theme &
+                    Sub-themes</a>
                 <!-- <a href="scientific_sessions.php" class="nav-item nav-link">Scientific Program</a> -->
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Scientific <br> Program</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a href="index.php?controller=home&action=scientific_guidelines" class="dropdown-item">Scientific Guidelines</a>
+                        <a href="index.php?controller=home&action=scientific_guidelines"
+                            class="dropdown-item">Scientific Guidelines</a>
                         <!-- <a href="presentation_schedule.php" class="dropdown-item">Presentation Schedule</a> -->
-                        <a href="index.php?controller=home&action=scientific_brochure" class="dropdown-item">Scientific Brochure</a>
-                        <a href="index.php?controller=home&action=keynote_speakers" class="dropdown-item">Keynote Speakers</a>
+                        <a href="index.php?controller=home&action=scientific_brochure" class="dropdown-item">Scientific
+                            Brochure</a>
+                        <a href="index.php?controller=home&action=keynote_speakers" class="dropdown-item">Keynote
+                            Speakers</a>
                         <a href="index.php?controller=home&action=symposium" class="dropdown-item">Symposium</a>
-                        <a href="index.php?controller=home&action=scientific_schedule" class="dropdown-item">Scientific Schedule</a>
+                        <a href="index.php?controller=home&action=scientific_schedule" class="dropdown-item">Scientific
+                            Schedule</a>
                         <!--  <a href="" class="dropdown-item">Preconference Workshop</a>
                         <a href="" class="dropdown-item">Workshops</a>
                         <a href="" class="dropdown-item">Scientific Sessions</a> -->
                     </div>
                 </div>
 
-                <a href="index.php?controller=home&action=previous_conference" class="nav-item nav-link">Previous Conference</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        Previous <br> Conference
+                    </a>
+
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="index.php?controller=home&action=previous_conference&version=1" class="dropdown-item">
+                            Vidyen
+                        </a>
+
+                        <a href="index.php?controller=home&action=previous_conference&version=2" class="dropdown-item">
+                            Vidyen 2.0
+                        </a>
+
+                        <a href="index.php?controller=home&action=previous_conference&version=3" class="dropdown-item">
+                            Vidyen 3.0
+                        </a>
+                    </div>
+                </div>
 
                 <!-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Conference  <br> Archives</a>
@@ -129,11 +161,15 @@
                     </div>
                 </div> -->
                 <a href="index.php?controller=home&action=contact" class="nav-item nav-link">Contact</a>
-                <a href="index.php?controller=home&action=registration_details" class="nav-item nav-link d-block d-lg-none">Registration</a>
-                <a href="index.php?controller=authentication&action=login" class="nav-item nav-link d-block d-lg-none">Login</a>
+                <a href="index.php?controller=home&action=registration_details"
+                    class="nav-item nav-link d-block d-lg-none">Registration</a>
+                <a href="index.php?controller=authentication&action=login"
+                    class="nav-item nav-link d-block d-lg-none">Login</a>
             </div>
-            <a href="index.php?controller=home&action=registration_details" class="btn btn-primary mr-3 d-none d-lg-block nav-item nav-link">Registration</a>
-            <a href="index.php?controller=authentication&action=login" class="btn btn-primary mr-3 d-none d-lg-block nav-item nav-link">Login</a>
+            <a href="index.php?controller=home&action=registration_details"
+                class="btn btn-primary mr-3 d-none d-lg-block nav-item nav-link">Registration</a>
+            <a href="index.php?controller=authentication&action=login"
+                class="btn btn-primary mr-3 d-none d-lg-block nav-item nav-link">Login</a>
 
         </div>
     </nav>
@@ -145,20 +181,20 @@
     </section>
 
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            var currentPath = window.location.pathname;
-            var navItems = document.querySelectorAll('.navbar-nav .nav-link');
-            navItems.forEach(function(item) {
-                var href = item.getAttribute('href');
-                if (href === currentPath || (href !== '/' && currentPath.indexOf(href) > -1)) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
+    document.addEventListener('DOMContentLoaded', function() {
+        var currentPath = window.location.pathname;
+        var navItems = document.querySelectorAll('.navbar-nav .nav-link');
+        navItems.forEach(function(item) {
+            var href = item.getAttribute('href');
+            if (href === currentPath || (href !== '/' && currentPath.indexOf(href) > -1)) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
         });
+    });
     </script>
 
-     <!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> 
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>

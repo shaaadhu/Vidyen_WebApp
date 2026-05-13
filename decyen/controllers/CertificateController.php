@@ -112,10 +112,10 @@ class CertificateController
             'co_author_certificate' => ['co_author_certificate','Co-Author Certificate',100,103]
         ];
 
+        
         if (!isset($certMap[$type])) {
             return $this->showError("Error", "Certificate type definition not found.");
         }
-        
             $config = $certMap[$type];
        // 3. Call the Engine
         return $this->generateCertificate([
@@ -164,7 +164,7 @@ class CertificateController
             }
 
 
-             if (!class_exists('TCPDF')) {
+            if (!class_exists('TCPDF')) {
                 require_once __DIR__ . '/../assets/libraries/tecnickcom/tcpdf/tcpdf.php';
             }
             $pdf = new \TCPDF('L', 'mm', 'A4', true, 'UTF-8', false);

@@ -32,26 +32,6 @@
                         <?php endforeach; ?>
                     </div>
 
-                    <!-- <form method="GET" action="index.php?controller=admin" class="row mb-4">
-                        <input type="hidden" name="action" value="view_generated">
-                        <div class="col-md-4">
-                            <label>Filter by Certificate Type</label>
-                            <select name="type" class="form-control" onchange="this.form.submit()">
-                                <option value="all">All Types</option>
-                                <?php foreach ($certTypes as $key => $name): ?>
-                                    <option value="<?= $key ?>" <?= ($type == $key) ? 'selected' : '' ?>><?= $name ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                             <label>Search Participant</label>
-                            <input type="text" name="search" class="form-control" placeholder="Search..." value="<?= htmlspecialchars($search) ?>">
-                        </div>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                            <a href="router.php?action=view_generated" class="btn btn-secondary">Reset</a>
-                        </div>
-                    </form> -->
                     <form method="GET" action="index.php" class="row mb-4">
                         <input type="hidden" name="controller" value="admin">
                         <input type="hidden" name="action" value="viewGeneratedCertificates">

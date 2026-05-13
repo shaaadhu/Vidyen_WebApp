@@ -71,18 +71,45 @@ class HomeController
 
     public function previous_conference()
     {
+       $version = $_GET['version'] ?? '1';
 
+       $versionConfig = [
+    '1' => [
+        'souvenir'    => 65,
+        'newsletter'  => 27,
+        'schedule'    => 1,
+        'winner'      => 1,
+    ],
+    '2' => [
+        'souvenir'    => 1,
+        'newsletter'  => 21,
+        'schedule'    => 9,
+        'winner'      => 13,
+    ],
+    '3' => [
+        'souvenir'    => 1,
+        'newsletter'  => 23,
+        'schedule'    => 1,
+        'winner'      => 1,
+    ],
+];
 
+$config = $versionConfig[$version] ?? $versionConfig['1']; // fallback to 1
+       
         $data = [
-            'souvenir_images'   => $this->getGalleryImages('souvenir', 'VIDYEN Sovenir_page-', 65),
-            'newsletter_images' => $this->getGalleryImages('newsletter', 'VIDYEN REPORT 2.0-1_page-', 24),
-            'schedule_images'   => $this->getGalleryImages('schedule', 'Vidyen schedule_page-', 9),
-            'winner_images'     => $this->getGalleryImages('winner', 'Winners list_page-', 13)
-        ];
+    'souvenir_images'   => $this->getGalleryImages("{$version}_souvenir",    "VIDYEN Sovenir_page-",         $config['souvenir']),
+    'newsletter_images' => $this->getGalleryImages("{$version}_newsletter",  "VIDYEN newsletter_page-",   $config['newsletter']),
+    'schedule_images'   => $this->getGalleryImages("{$version}_schedule",    "Vidyen schedule_page-",        $config['schedule']),
+    'winner_images'     => $this->getGalleryImages("{$version}_winner",       "Winners list_page-",           $config['winner']),
+];
 
         $action = 'previous_conference';
         $this->view($action, $data);
     }
+   
+
+
+    
 
     public function contact()
     {
@@ -158,53 +185,6 @@ class HomeController
         echo $response;
     }
 
-    // public function register_user()
-    // {
-    //     $token = Csrf::getTokenFromRequest();
-    //     if (!Csrf::validateToken($token)) {
-    //         die("Security error: Invalid CSRF token");
-    //     }
-
-    //     $model = new RegistrationModel();
-    //     // Prepare data from $_POST
-    //     $pre_type = !empty($_POST['pre_type']) ? implode(',', $_POST['pre_type']) : '';
-    //     $presentation = !empty($_POST['presentation']) ? implode(',', $_POST['presentation']) : '';
-
-    //     $formData = $_POST;
-    //     $formData['pre_type'] = $pre_type;
-    //     $formData['presentation'] = $presentation;
-    //     $formData['code'] = $model->generateRegisterCode();
-
-    //     if ($model->registerUser($formData)) {
-
-    //         ob_start();
-    //         $user_name = $data['full_name'];
-    //         $register_code = $register_code;
-    //         $Amt1 = $Amt1;
-    //         $link = $link;
-    //         $delegate_type = $data['delegate_type'];
-    //         $email = $data['email'];
-    //         $mobile = $data['mobile'];
-    //         include __DIR__ . '/../views/registration_email.php';
-        
-    //         $body = ob_get_clean();
-
-    //         $mailService = new MailService();
-
-    //         $mailService->sendMail(
-    //             $data['email'],
-    //             $data['full_name'],
-    //             "VIDYEN Conference Karnataka 2025 - Yenepoya Dental College",
-    //             $body
-    //         );
-
-
-    //         echo "success";
-    //     } else {
-    //         echo "error";
-    //     }
-    //     exit; // Stop execution for AJAX
-    // }
     
     public function register_user()
     {
@@ -220,11 +200,11 @@ class HomeController
         
         $model = new RegistrationModel();
         // Prepare data from $_POST
-        $pre_type = !empty($_POST['pre_type']) ? implode(',', $_POST['pre_type']) : '';
+        // $pre_type = !empty($_POST['pre_type']) ? implode(',', $_POST['pre_type']) : '';
         $presentation = !empty($_POST['presentation']) ? implode(',', $_POST['presentation']) : '';
 
         $formData = $_POST;
-        $formData['pre_type'] = $pre_type;
+        // $formData['podium_lecture'] = $pre_type;
         $formData['presentation'] = $presentation;
         $formData['code'] = $model->generateRegisterCode();
 
