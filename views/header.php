@@ -176,7 +176,7 @@
     <!-- Header End -->
     <section style="width: 100%;">
         <div class="container-fluid p-0">
-            <img src="<?= ROOT ?>/assets/images/vidyen-banner4.0.jpg" alt="first_image" width="100%" height="100%">
+            <img src="<?= ROOT ?>/assets/images/vidyen-banner.webp" alt="first_image" width="100%" height="100%">
         </div>
     </section>
 

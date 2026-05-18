@@ -31,7 +31,7 @@
                              <div class="col-md-6 mb-3">
                                  <label for="first_name"><b>Sub-themes/categories</b></label>
                                  <select id="subt" name="subthemes" required class="form-control">
-                                     <option value="">Select Subtheme categories..</option>
+                                     <!-- <option value="">Select Subtheme categories..</option>
                                     <option value="Blended Learning Strategies in Dental Education">Blended Learning Strategies in Dental Education</option>
                                     <option value="Virtual Simulations and Hands-On Training: Bridging the Gap">Virtual Simulations and Hands-On Training: Bridging the Gap</option>
                                     <option value="Enhancing Student Engagement in Hybrid Learning Environments">Enhancing Student Engagement in Hybrid Learning Environments</option>
@@ -41,13 +41,14 @@
                                     <option value="Assessment and Feedback in Hybrid Learning Models">Assessment and Feedback in Hybrid Learning Models</option>
                                     <option value="Faculty Development for Effective Hybrid Teaching">Faculty Development for Effective Hybrid Teaching</option>
                                     <option value="Global Collaboration in Hybrid Dental Education">Global Collaboration in Hybrid Dental Education</option>
-                                    <option value="Speciality Presentation">Speciality Presentation</option>
-                                    <!-- <option value="Assessment and Competency-Based Education">Assessment and Competency-Based Education</option>
+                                    <option value="Speciality Presentation">Speciality Presentation</option> -->
+                                    <option value="">Select Subtheme categories..</option>
+                                    <option value="Assessment and Competency-Based Education">Assessment and Competency-Based Education</option>
                                     <option value="Teaching–Learning Innovations in the Digital Era">Teaching–Learning Innovations in the Digital Era</option>
                                     <option value="Quality Enhancement and Accreditation in Dental Education">Quality Enhancement and Accreditation in Dental Education</option>
                                     <option value="Interprofessional Education and Collaborative Practice">Interprofessional Education and Collaborative Practice (IPE)</option>
                                     <option value="AI, Empathy, and Ethics in Modern Dental Practice">AI, Empathy, and Ethics in Modern Dental Practice</option>
-                                    <option value="Faculty Development and Leadership for the Future">Faculty Development and Leadership for the Future</option> -->
+                                    <option value="Faculty Development and Leadership for the Future">Faculty Development and Leadership for the Future</option>
                                        
                                  </select>
                              </div>

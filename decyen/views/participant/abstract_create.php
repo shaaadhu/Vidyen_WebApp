@@ -24,6 +24,21 @@
                                 <input type="text" name="register_id" required class="form-control" id="register_id" value="<?php echo $userid; ?>" readonly>
                             </div>
                             <div class="col-md-6">
+                                <label for="last_name"><b>Type Of Presentation</b></label>
+                                <select id="type_presentation" name="type_presentation" class="form-control" required>
+                                    <option value="" selected>Choose type of presentation</option>
+                                    <!-- <option value="Workshops">Workshops</option> -->
+                                    <option value="Oral Presentations for research submission">Oral Presentations for research submission</option>
+                                    <option value="Oral Presentations for Speciality Research">Oral Presentations for Speciality Research</option>
+                                    <option value="Posters">Posters</option>
+                                    <option value="Yenvision- Lightning talk">Yenvision- Lightning talk</option>
+                                </select>
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                            
+                             <div class="col-md-6  mt-5">
                                 <label for="first_name"><b>Sub-themes/categories</b></label>
                                 <select id="sub_themes" name="sub_themes" required class="form-control">
                                     <option value="">Select Subtheme categories..</option>
@@ -39,20 +54,6 @@
                                     <option value="Speciality Presentation">Speciality Presentation</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mt-5">
-                                <label for="last_name"><b>Type Of Presentation</b></label>
-                                <select id="type_presentation" name="type_presentation" class="form-control" required>
-                                    <option value="" selected>Choose type of presentation</option>
-                                    <!-- <option value="Workshops">Workshops</option> -->
-                                    <option value="Oral Presentations for research submission">Oral Presentations for research submission</option>
-                                    <option value="Oral Presentations for Speciality Research">Oral Presentations for Speciality Research</option>
-                                    <option value="Posters">Posters</option>
-                                    <option value="Yenvision- Lightning talk">Yenvision- Lightning talk</option>
-                                </select>
-                            </div>
-
                             <div class="col-md-6 mt-5">
                                 <label for="cat_presentation"><b>Category Of Presentation</b></label>
                                 <select id="cat_presentation" name="cat_presentation" class="form-control" required>
@@ -408,4 +409,97 @@
     //             }
 
     // });
+    
+document.getElementById("type_presentation").addEventListener("change", function () {
+
+    const presentationType = this.value;
+    const subThemes = document.getElementById("sub_themes");
+
+    // Clear existing options
+    subThemes.innerHTML = '<option value="">Select Subtheme categories..</option>';
+
+    let options = [];
+
+    if (presentationType === "Oral Presentations for research submission") {
+
+        options = [
+            "Assessment and Competency-Based Education",
+            "Teaching–Learning Innovations in the Digital Era",
+            "Quality Enhancement and Accreditation in Dental Education",
+            "Interprofessional Education and Collaborative Practice (IPE)",
+            "AI, Empathy, and Ethics in Modern Dental Practice",
+            "Faculty Development and Leadership for the Future"
+        ];
+
+    } else if (presentationType === "Oral Presentations for Speciality Research") {
+
+        options = [
+            "Orthodontics",
+            "Pedodontics",
+            "Public Health Dentistry",
+            "Periodontics",
+            "Oral Surgery",
+            "Oral Medicine and Radiology",
+            "Prosthodontics",
+            "Implantology",
+            "Dental Materials",
+            "Oral Pathology"
+        ];
+
+    } else if (presentationType === "Posters") {
+
+        options = [
+            "Assessment and Competency-Based Education",
+            "Teaching–Learning Innovations in the Digital Era",
+            "Quality Enhancement and Accreditation in Dental Education",
+            "Interprofessional Education and Collaborative Practice (IPE)",
+            "AI, Empathy, and Ethics in Modern Dental Practice",
+            "Faculty Development and Leadership for the Future",
+            "Orthodontics",
+            "Pedodontics",
+            "Public Health Dentistry",
+            "Periodontics",
+            "Oral Surgery",
+            "Oral Medicine and Radiology",
+            "Prosthodontics",
+            "Implantology",
+            "Dental Materials",
+            "Oral Pathology"
+        ];
+
+    } else if (presentationType === "Yenvision- Lightning talk") {
+
+                options = [
+            "Assessment and Competency-Based Education",
+            "Teaching–Learning Innovations in the Digital Era",
+            "Quality Enhancement and Accreditation in Dental Education",
+            "Interprofessional Education and Collaborative Practice (IPE)",
+            "AI, Empathy, and Ethics in Modern Dental Practice",
+            "Faculty Development and Leadership for the Future",
+            "Orthodontics",
+            "Pedodontics",
+            "Public Health Dentistry",
+            "Periodontics",
+            "Oral Surgery",
+            "Oral Medicine and Radiology",
+            "Prosthodontics",
+            "Implantology",
+            "Dental Materials",
+            "Oral Pathology"
+        ];
+    }
+
+    // Append new options
+    options.forEach(function (item) {
+
+        const option = document.createElement("option");
+
+        option.value = item;
+        option.textContent = item;
+
+        subThemes.appendChild(option);
+    });
+
+});
+
 </script>

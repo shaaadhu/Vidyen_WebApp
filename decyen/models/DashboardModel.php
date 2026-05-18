@@ -10,21 +10,13 @@ class DashboardModel {
 
   
     public function getConferenceRooms() {
-        $query = "SELECT * FROM conference_room WHERE deleted = 0 ORDER BY type, name";
+        $query = "SELECT * FROM conference_room WHERE deleted = 0 ORDER BY id ASC";
         $result = mysqli_query($this->db, $query);
         $rooms = [];
         while ($row = mysqli_fetch_assoc($result)) {
             $rooms[$row['type']][] = $row;
         }
 
-        // Sort rooms numerically by the number after the hyphen
-        foreach ($rooms as $type => &$type_rooms) {
-            usort($type_rooms, function($a, $b) {
-                preg_match('/-\s*(\d+)/', $a['name'], $ma);
-                preg_match('/-\s*(\d+)/', $b['name'], $mb);
-                return ((int)($ma[1] ?? 0)) - ((int)($mb[1] ?? 0));
-            });
-        }
         return $rooms;
     }
 
