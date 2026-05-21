@@ -4,10 +4,28 @@
 <div class="content-wrapper">
     <div class="card shadow-lg">
         <div class="card-body">
-            <h4 class="card-title text-primary">Certificate Management</h4>
+           <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3 gap-2">
+    <h4 class="card-title text-primary mb-0">Certificate Management</h4>
+
+    <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">
+        <input type="hidden" name="controller" value="admin">
+        <input type="hidden" name="action" value="certificate_generates"> 
+        <label for="filter_year" class="me-2 fw-bold text-secondary mb-0 small text-nowrap">Filter by Year:</label>
+        <select name="filter_year" id="filter_year" class="form-select form-select-sm"
+                style="width: 110px;" onchange="this.form.submit()">
+            <?php foreach ($data['year_options'] as $val => $label): ?>
+                <option value="<?= htmlspecialchars($val) ?>"
+                    <?= ($data['selected_year'] === (string)$val) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($label) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </form>
+</div>
             <p class="card-description">
                 Generate certificates for participants
             </p>
+            
 
             <?php if (isset($_GET['success'])): ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -49,19 +67,21 @@
                 
 
                 <div class="table-responsive">
-                    <div class="mb-3">
-                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="selectAll()">
-                                    <i class="fa-solid fa-check-double"></i> Select All
-                                </button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="deselectAll()">
-                                    <i class="fa-solid fa-xmark"></i> Deselect All
-                                </button>
-                                <button type="button" class="btn btn-sm btn-outline-info" onclick="selectVisible()">
-                                    <i class="fa-solid fa-check"></i> Select Visible
-                                </button>
-                                <span class="ml-3" id="selectedCount">Selected: 0</span>
-                                <span class="ml-3" id="visibleCount"></span>
-                            </div>
+                    <div class="mb-3 d-flex align-items-center gap-2 flex-wrap">
+   
+
+    <button type="button" class="btn btn-sm btn-outline-primary" onclick="selectAll()">
+        <i class="fa-solid fa-check-double"></i> Select All
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="deselectAll()">
+        <i class="fa-solid fa-xmark"></i> Deselect All
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-info" onclick="selectVisible()">
+        <i class="fa-solid fa-check"></i> Select Visible
+    </button>
+    <span class="ml-3" id="selectedCount">Selected: 0</span>
+    <span class="ml-3" id="visibleCount"></span>
+    </div>
                     <table class="table table-hover" id="participantTable">
                         <thead>
                             <tr>
@@ -119,150 +139,6 @@
     </div>
 </div>
 
-<!-- <script>
-    // Update certificate status when certificate type changes
-    document.getElementById('certificate_type').addEventListener('change', function() {
-    const certType = this.value;
-
-    const statusCells = document.querySelectorAll('.certificate-status');
-
-    //  TABLE SWITCH LOGIC
-    const coAuthorTable = document.getElementById('coAuthorTable');
-    const defaultTable = document.getElementById('defaultTable');
-
-    if (certType === 'co_author_certificate') {
-        coAuthorTable.style.display = '';
-        defaultTable.style.display = 'none';
-    } else {
-        coAuthorTable.style.display = 'none';
-        defaultTable.style.display = '';
-    }
-
-    // RESET CHECKBOXES WHEN SWITCHING
-    document.querySelectorAll('.user-checkbox').forEach(cb => cb.checked = false);
-    document.getElementById('selectAllCheckbox').checked = false;
-    updateCount();
-
-
-    if (!certType) {
-        statusCells.forEach(cell => {
-            cell.innerHTML = '<span class="badge badge-secondary">Select certificate type</span>';
-        });
-        return;
-    }
-
-    //  AJAX STATUS CHECK
-    statusCells.forEach(cell => {
-        const userId = cell.getAttribute('data-user');
-        fetch('check_certificate_status.php?user=' + userId + '&type=' + certType)
-            .then(response => response.json())
-            .then(data => {
-                if (data.generated) {
-                    cell.innerHTML = '<span class="badge badge-success">✓ Generated on ' + data
-                        .date + '</span>';
-                } else {
-                    cell.innerHTML = '<span class="badge badge-warning">Not Generated</span>';
-                }
-            });
-    });
-
-    updateGenerateButton();
-   });
-
-    function toggleAll(checkbox) {
-        const checkboxes = document.querySelectorAll('.user-checkbox');
-        checkboxes.forEach(cb => cb.checked = checkbox.checked);
-        updateCount();
-    }
-
-    function selectAll() {
-        const checkboxes = document.querySelectorAll('.user-checkbox');
-        checkboxes.forEach(cb => cb.checked = true);
-        document.getElementById('selectAllCheckbox').checked = true;
-        updateCount();
-    }
-
-    function deselectAll() {
-        const checkboxes = document.querySelectorAll('.user-checkbox');
-        checkboxes.forEach(cb => cb.checked = false);
-        document.getElementById('selectAllCheckbox').checked = false;
-        updateCount();
-    }
-
-    function updateCount() {
-        const checked = document.querySelectorAll('.user-checkbox:checked').length;
-        document.getElementById('selectedCount').textContent = 'Selected: ' + checked;
-        updateGenerateButton();
-    }
-
-    function updateGenerateButton() {
-        const certType = document.getElementById('certificate_type').value;
-        const checked = document.querySelectorAll('.user-checkbox:checked').length;
-        const btn = document.getElementById('generateBtn');
-
-        if (certType && checked > 0) {
-            btn.disabled = false;
-        } else {
-            btn.disabled = true;
-        }
-    }
-
-    // Search functionality
-    function searchParticipants() {
-        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        const rows = document.querySelectorAll('.participant-row');
-        let visibleCount = 0;
-
-        rows.forEach(row => {
-            const regCode = row.getAttribute('data-regcode');
-            const name = row.getAttribute('data-name');
-            const email = row.getAttribute('data-email');
-
-            if (regCode.includes(searchTerm) || name.includes(searchTerm) || email.includes(searchTerm)) {
-                row.style.display = '';
-                visibleCount++;
-            } else {
-                row.style.display = 'none';
-            }
-        });
-
-        document.getElementById('visibleCount').textContent = 'Showing: ' + visibleCount + ' of ' + rows.length;
-    }
-
-    function clearSearch() {
-        document.getElementById('searchInput').value = '';
-        searchParticipants();
-    }
-
-    function selectVisible() {
-        const rows = document.querySelectorAll('.participant-row');
-        rows.forEach(row => {
-            if (row.style.display !== 'none') {
-                const checkbox = row.querySelector('.user-checkbox');
-                if (checkbox) {
-                    checkbox.checked = true;
-                }
-            }
-        });
-        updateCount();
-    }
-
-    // Form submission confirmation
-    document.getElementById('certificateForm').addEventListener('submit', function(e) {
-        const certType = document.getElementById('certificate_type');
-        const selectedText = certType.options[certType.selectedIndex].text;
-        const count = document.querySelectorAll('.user-checkbox:checked').length;
-
-        if (!confirm('Generate "' + selectedText + '" certificate for ' + count + ' participant(s)?')) {
-            e.preventDefault();
-        }
-    });
-
-    // Initialize visible count on page load
-    window.addEventListener('load', function() {
-        searchParticipants();
-    });
-</script> -->
 
 <script>
 // Update certificate status when certificate type changes

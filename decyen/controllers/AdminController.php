@@ -670,43 +670,42 @@ class AdminController
 
     // get all certificate generation details for admin view                         (7. CERTIFICATE GENERATION)
     public function certificate_generates()
-    {
-        // Auth check
-        if (isset($_SESSION['user_id']) && ($_SESSION['usertype'] != 'admin' || ($_SESSION['user_id'] == ''))) {
-            require_once __DIR__ . '/../views/login.php';
-        }
-
-        // Get data from Model
-        // session_start();
-        $user_type = $_SESSION['usertype'];
-        $model = new AdminModel;
-        $participants = $model->getParticipants();
-        $coAuthors = $model->getCoAuthors();
-
-        // Define options for the view
-        $certTypes = [
-            "preconference_item_analysis" => "Pre-Conference Item Analysis",
-            "mindful_map" => "Pre-Conference Workshop - Mindful Map",
-            "sage" => "Pre-Conference SAGE",
-            "itlm" => "Pre-Conference Interactive Teaching Learning Methods",
-            "workshop_bridging" => "Workshop Course - Bridging Mind Building Care",
-            "workshop_proms_prems" => "Enhancing Health Care Using PROMs, PREMs, and Experiences in Dentistry- Workshop",
-            "workshop_microteaching" => "Microteaching Workshop",
-            "first_place_paper" => "1st Place Paper Award",
-            "second_place_paper" => "2nd Place Paper Award",
-            "first_place_poster" => "1st Place Poster Award",
-            "second_place_poster" => "2nd Place Poster Award",
-            "first_place_yenvision" => "1st Place YenVision Award",
-            "second_place_yenvision" => "2nd Place YenVision Award",
-            "co_author_certificate" => "Co-Author certificate"
-        ];
-
-        // Load the View
-        // require_once __DIR__ . '/../views/admin/certificate_generates.php';
-        $action = 'certificate_generates';
-        $content_file = __DIR__ . '/../views/admin/certificate_generates.php';
-        require_once __DIR__ . '/../views/main.php';
+{
+    // Auth check
+    if (!isset($_SESSION['user_id']) || $_SESSION['usertype'] != 'admin') {
+        header('location:index.php?controller=authentication&action=login');
+        exit;
     }
+
+    $user_type = $_SESSION['usertype'];
+    $model = new AdminModel;
+    $data = [];
+    $data = array_merge($data, $this->year_filter());
+    $year = $data['selected_year'];
+    $participants = $model->getParticipants($year);
+    $coAuthors = $model->getCoAuthors($year);
+
+    $certTypes = [
+        "preconference_item_analysis" => "Pre-Conference Item Analysis",
+        "mindful_map" => "Pre-Conference Workshop - Mindful Map",
+        "sage" => "Pre-Conference SAGE",
+        "itlm" => "Pre-Conference Interactive Teaching Learning Methods",
+        "workshop_bridging" => "Workshop Course - Bridging Mind Building Care",
+        "workshop_proms_prems" => "Enhancing Health Care Using PROMs, PREMs, and Experiences in Dentistry- Workshop",
+        "workshop_microteaching" => "Microteaching Workshop",
+        "first_place_paper" => "1st Place Paper Award",
+        "second_place_paper" => "2nd Place Paper Award",
+        "first_place_poster" => "1st Place Poster Award",
+        "second_place_poster" => "2nd Place Poster Award",
+        "first_place_yenvision" => "1st Place YenVision Award",
+        "second_place_yenvision" => "2nd Place YenVision Award",
+        "co_author_certificate" => "Co-Author certificate"
+    ];
+
+    $action = 'certificate_generates';
+    $content_file = __DIR__ . '/../views/admin/certificate_generates.php';
+    require_once __DIR__ . '/../views/main.php';
+}
 
 
     // AJAX: Check if certificate already generated for a user and type

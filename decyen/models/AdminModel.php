@@ -474,28 +474,30 @@ public function deleteRoom($id) {
 
 
 // get all participants for certificate generation
-public function getParticipants() 
+public function getParticipants($year) 
 {
         $query = "SELECT registration_code, honorofic, full_name, email 
                   FROM registration 
+                  WHERE year = $year
                   ORDER BY full_name ASC";
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
 // get all co-authors for certificate generation
-public function getCoAuthors() 
+public function getCoAuthors($year) 
 {
         $sql = "SELECT 
-            registration_id,
-            CONCAT(
-                SUBSTRING_INDEX(first_name, ',', 1), ' ',
-                SUBSTRING_INDEX(middle_name, ',', 1), ' ',
-                SUBSTRING_INDEX(last_name, ',', 1)
-            ) AS full_name,
-            SUBSTRING_INDEX(author_email, ',', 1) AS author_email
-        FROM author_details
-        WHERE LOWER(author_type) LIKE '%co author%'";
+                registration_id,
+                CONCAT(
+                    SUBSTRING_INDEX(first_name, ',', 1), ' ',
+                    SUBSTRING_INDEX(middle_name, ',', 1), ' ',
+                    SUBSTRING_INDEX(last_name, ',', 1)
+                ) AS full_name,
+                SUBSTRING_INDEX(author_email, ',', 1) AS author_email
+              FROM author_details
+              WHERE LOWER(author_type) LIKE '%co author%'
+              AND YEAR(STR_TO_DATE(created_on, '%d-%m-%Y')) = $year";
 
         return mysqli_query($this->conn, $sql);
     
