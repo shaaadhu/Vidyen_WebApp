@@ -45,9 +45,9 @@ class AdminModel
     }
 
     // get pre-conference submitted details for admin view     (2. PRE-CONFERENCE)
-    public function getAll_preConference()
+    public function getAll_preConference($year)
     {
-        $query = "SELECT * FROM pre_conference";
+        $query = "SELECT * FROM pre_conference WHERE YEAR(STR_TO_DATE(created_on, '%d-%m-%Y')) = $year";
         return $this->conn->query($query);
     }
 
@@ -113,9 +113,9 @@ class AdminModel
 
     
     // get all workshop details for admin view                       (3. WORKSHOP)
-    public function getAllWorkshops()
+    public function getAllWorkshops($year)
     {
-        $query = "SELECT * FROM `workshop`";
+        $query = "SELECT * FROM `workshop` WHERE YEAR(STR_TO_DATE(created_on, '%d-%m-%Y')) = $year";
         $result = mysqli_query($this->conn, $query);
 
         $workshops = [];
@@ -181,7 +181,7 @@ class AdminModel
     }
 
     // get all abstract details for admin view                       (4. ABSTRACT)
-    public function getAllAbstracts()
+    public function getAllAbstracts($year)
     {
        
         $query = "SELECT a.*, 
@@ -190,7 +190,7 @@ class AdminModel
                JOIN reviewer r ON ar.reviewer_id = r.reviewer_code 
                WHERE ar.abstract_id = a.abstract_id 
                LIMIT 1) as reviewer_name 
-              FROM abstract a";
+              FROM abstract a WHERE YEAR(STR_TO_DATE(created_on, '%d-%m-%Y')) = $year";
         // $query ="SELECT * FROM abstract";     
 
         $result = mysqli_query($this->conn, $query);

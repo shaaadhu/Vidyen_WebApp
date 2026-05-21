@@ -6,11 +6,7 @@
     <div class="col-12 grid-margin">
         
         <div class="card shadow-lg">
-            <!-- <div class="card-title p-3 text-primary d-flex justify-content-between">
-                <h3>Participant List</h3>
             
-                <a href="index.php?controller=admin&action=exportCSV" class="btn btn-primary rounded fw-bold">Download Excel</a>
-            </div> -->
             <div class="card-title p-3 text-primary d-flex justify-content-between align-items-center">
                     <h3>Participant List</h3>
 

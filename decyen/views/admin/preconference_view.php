@@ -4,9 +4,25 @@
 <div class="content-wrapper bg-light">
   <div class="col-12 grid-margin">
     <div class="card shadow-lg">
-      <div class="card-title text-primary p-3">
-        <h3>Submitted Pre-Conference</h3>
-      </div>
+     
+      <div class="card-title p-3 text-primary d-flex justify-content-between align-items-center">
+    <h3 class="mb-0">Submitted Pre-Conference</h3>
+
+    <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">
+        <input type="hidden" name="controller" value="admin">
+        <input type="hidden" name="action" value="preconference_view"> 
+        <label for="filter_year" class="me-2 fw-bold text-secondary mb-0 small text-nowrap">Filter by Year:</label>
+        <select name="filter_year" id="filter_year" class="form-select form-select-sm"
+                style="width: 110px;" onchange="this.form.submit()">
+            <?php foreach ($data['year_options'] as $val => $label): ?>
+                <option value="<?= htmlspecialchars($val) ?>"
+                    <?= ($data['selected_year'] === (string)$val) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($label) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </form>
+</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered dt table-hover" id="dataTable">

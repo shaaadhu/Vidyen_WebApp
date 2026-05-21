@@ -17,6 +17,18 @@ class AdminController
         }
     }
 
+    private  function year_filter(){
+          $currentYear = (int)date('Y');
+        $selectedYear = isset($_GET['filter_year']) ? $_GET['filter_year'] : (string)$currentYear;
+
+        return [
+            'year_options' => [
+                (string)$currentYear        => (string)$currentYear,
+                (string)($currentYear - 1)  => (string)($currentYear - 1)             
+            ],
+            'selected_year' => $selectedYear,
+        ];
+    }
 
 
     // get all registration details for admin                         (1.REGISTRATION)
@@ -27,15 +39,9 @@ class AdminController
         }
         $user_type = $_SESSION['usertype'];
         $model = new AdminModel;
-        $currentYear = (int)date('Y');
-        $year = isset($_GET['filter_year']) ? $_GET['filter_year'] : (string)$currentYear;
-        $data['year_options'] = [
-            (string)$currentYear      => (string)$currentYear,
-            (string)($currentYear - 1) => (string)($currentYear - 1)
-          
-        ];
-        $data['selected_year'] = $year;
-
+        $data = [];
+        $data = array_merge($data, $this->year_filter());
+        $year = $data['selected_year'];
         $participants = $model->getAllParticipants($year);
         $content_file = __DIR__ . '/../views/admin/admin_reg_view.php';
         require_once __DIR__ . '/../views/main.php';
@@ -123,7 +129,10 @@ class AdminController
         }
         $user_type = $_SESSION['usertype'];
         $model = new AdminModel;
-        $result = $model->getAll_preConference();
+        $data = [];
+        $data = array_merge($data, $this->year_filter());
+        $year = $data['selected_year'];
+        $result = $model->getAll_preConference($year);
         $content_file = __DIR__ . '/../views/admin/preconference_view.php';
         require_once __DIR__ . '/../views/main.php';
     }
@@ -136,6 +145,7 @@ class AdminController
         }
         $user_type = $_SESSION['usertype'];
         $model = new AdminModel;
+        
         $id = $_GET['id'] ?? null;
         if (!$id) {
             die("Invalid ID");
@@ -217,7 +227,10 @@ class AdminController
         }
         $user_type = $_SESSION['usertype'];
         $model = new AdminModel;
-        $workshops = $model->getAllWorkshops();
+         $data = [];
+        $data = array_merge($data, $this->year_filter());
+        $year = $data['selected_year'];
+        $workshops = $model->getAllWorkshops($year);
 
         // 3. Load the View and pass data
         // require_once __DIR__ . '/../views/admin/workshop_view.php';
@@ -310,7 +323,10 @@ class AdminController
         if ($this->isAuth()) {
             $user_type = $_SESSION['usertype'];
             $model = new AdminModel;
-            $abstracts = $model->getAllAbstracts();
+            $data = [];
+            $data = array_merge($data, $this->year_filter());
+            $year = $data['selected_year'];
+            $abstracts = $model->getAllAbstracts($year);
             $action = 'abstract_view';
             // require_once __DIR__ . '/../views/admin/abstract_view.php';
             $content_file = __DIR__ . '/../views/admin/abstract_view.php';
