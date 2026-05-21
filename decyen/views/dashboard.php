@@ -1,9 +1,30 @@
 <div class="content-wrapper bg-light p-4">
-    <h2 class="text-primary mb-4">Dashboard</h2>
+    <!-- <h2 class="text-primary mb-4">Dashboard</h2> -->
+     <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary mb-0">Dashboard</h2>
+        
+        <!-- Only displays this dropdown selector block if the user is logged in as an admin -->
+        <?php if ($user_type == 'admin'): ?>
+           <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border">
+                <input type="hidden" name="controller" value="authentication">
+                <input type="hidden" name="action" value="dashboard">
+                <label for="filter_year" class="me-2 fw-bold text-secondary mb-0 small text-nowrap">Filter by Year:</label>
+                <select name="filter_year" id="filter_year" class="form-select form-select-sm" 
+                        style="width: 130px;" onchange="this.form.submit()">
+                    <?php foreach ($data['year_options'] as $val => $label): ?>
+                        <option value="<?= htmlspecialchars($val) ?>"
+                            <?= ($data['selected_year'] === (string)$val) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($label) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </form>
+        <?php endif; ?>
+    </div>
 
     <div class="card shadow-lg">
         <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Conference Rooms</h4>
+            <h4 class="mb-0">Conference Rooms</h4>  
         </div>
         <div class="card-body">
             <?php if (!empty($data['rooms'])): ?>

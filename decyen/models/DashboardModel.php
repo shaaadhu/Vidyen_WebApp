@@ -9,17 +9,26 @@ class DashboardModel {
     }
 
   
-    public function getConferenceRooms() {
-        $query = "SELECT * FROM conference_room WHERE deleted = 0 ORDER BY id ASC";
+    public function getConferenceRooms($year) {
+        if ($year) {
+            $year = (int)$year; // sanitize
+            $condition = "AND YEAR(STR_TO_DATE(created_on, '%d-%m-%Y')) = $year";
+        } else {
+            $condition = ""; // show all years
+        }
+
+        $query = "SELECT * FROM conference_room 
+                WHERE deleted = 0 
+                $condition
+                ORDER BY id ASC";
+
         $result = mysqli_query($this->db, $query);
         $rooms = [];
         while ($row = mysqli_fetch_assoc($result)) {
             $rooms[$row['type']][] = $row;
-        }
-
-        return $rooms;
     }
-
+    return $rooms;
+}
     public function getCount($table, $where = "") {
         $query = "SELECT count(*) as total FROM `$table` " . ($where ? "WHERE $where" : "");
         $res = mysqli_query($this->db, $query);

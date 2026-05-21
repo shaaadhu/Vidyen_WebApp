@@ -77,8 +77,8 @@ class HomeController
     '1' => [
         'souvenir'    => 65,
         'newsletter'  => 27,
-        'schedule'    => 1,
-        'winner'      => 1,
+        'schedule'    => 5,
+        'winner'      => 2,
     ],
     '2' => [
         'souvenir'    => 1,
@@ -214,7 +214,7 @@ $config = $versionConfig[$version] ?? $versionConfig['1']; // fallback to 1
             $user_name = $formData['full_name'];
             $register_code = $formData['code'];  // FIX: Use from $formData      
             $Amt1 = ($formData['delegate_type'] == 'National') ? '5000' : '10000'; 
-            $link = 'https://rzp.io/rzp/PuIYl7I';  //            
+            $link = 'https://rzp.io/rzp/v96ZKQn';  //            
             $delegate_type = $formData['delegate_type'];
             $email = $formData['email'];
             $mobile = $formData['mobile'];

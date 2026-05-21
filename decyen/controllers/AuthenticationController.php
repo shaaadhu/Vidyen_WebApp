@@ -76,13 +76,26 @@ class AuthenticationController
         $userid = $_SESSION['user_id'];
         $model = new DashboardModel();
         $data = [];
-        $data['rooms'] = $model->getConferenceRooms();
+        // $year = $_GET['filter_year'] ?? '2025';
+         $currentYear = (int)date('Y');
+         $year = isset($_GET['filter_year']) ? $_GET['filter_year'] : (string)$currentYear;
+
+        // Pass year options to view: current year + 2 previous years
+        $data['year_options'] = [
+            (string)$currentYear      => (string)$currentYear,
+            (string)($currentYear - 1) => (string)($currentYear - 1)
+            // (string)($currentYear - 2) => (string)($currentYear - 2),
+        ];
+        $data['selected_year'] = $year;
+
+        $data['rooms'] = $model->getConferenceRooms($year);
         if ($user_type == 'admin') {
+            
             $data['stats'] = [
-                'Total Registration' => $model->getCount('registration'),
-                'Pre-Conference Submitted' => $model->getCount('pre_conference'),
-                'Abstract Submitted' => $model->getCount('abstract'),
-                'Workshop Submitted' => $model->getCount('workshop')
+                'Total Registration' => $model->getCount('registration','year='.$year),
+                'Pre-Conference Submitted' => $model->getCount('pre_conference', "YEAR(STR_TO_DATE(created_on, '%d-%m-%Y')) = $year"),
+                'Abstract Submitted' => $model->getCount('abstract', "YEAR(STR_TO_DATE(created_on, '%d-%m-%Y')) = $year"),
+                'Workshop Submitted' => $model->getCount('workshop', "YEAR(STR_TO_DATE(created_on, '%d-%m-%Y')) = $year")
             ];
         } elseif ($user_type == 'participant') {
             $data['stats'] = [
@@ -112,6 +125,7 @@ class AuthenticationController
         require_once __DIR__ . '/../views/main.php';
         exit;
     }
+    
 
     // updating password
    

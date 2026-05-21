@@ -296,6 +296,20 @@ class ParticipantModel
         return ++$last_id; // PHP increments string-based numbers automatically
     }
 
+    // fetch count of abstracts submitted for a specific type and subtheme
+    public function getSubmissionCount($type, $subtheme)
+    {
+        $query = "SELECT COUNT(*) as total
+                FROM abstract
+                WHERE type_of_presentation = '$type'
+                AND sub_theme = '$subtheme'";
+
+        $result = mysqli_query($this->conn, $query);
+
+        $row = mysqli_fetch_assoc($result);
+
+        return $row['total'];
+    }
     // Saves both the abstract submission and the author details
     public function saveAbstractSubmission($mainData, $authorData)
     {
@@ -304,22 +318,28 @@ class ParticipantModel
 
         try {
             // 1. Insert into pre_conference
-            $stmt = mysqli_prepare($this->conn, "INSERT INTO abstract  (`registration_id`, `abstract_id`, `sub_theme`, `type_of_presentation`, `category_presentation`, `paper_title`, `keywords`, `paper_abstract`, `created_by`, `created_on`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt = mysqli_prepare($this->conn, "INSERT INTO abstract  
+            (`registration_id`, `abstract_id`, `sub_theme`, 
+            `type_of_presentation`, `category_presentation`, 
+            `paper_title`, `keywords`, `paper_abstract`,
+            `session_name`,
+            `created_by`, `created_on`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            mysqli_stmt_bind_param(
-                $stmt,
-                "ssssssssss",
-                $mainData['register_id'],
-                $mainData['abstract_id'],
-                $mainData['sub_themes'],
-                $mainData['type_presentation'],
-                $mainData['cat_presentation'],
-                $mainData['title_paper'],
-                $mainData['keywords'],
-                $mainData['abstract_details'],
-                $mainData['created_by'],
-                $mainData['created_on']
-            );
+                        mysqli_stmt_bind_param(
+                            $stmt,
+                            "sssssssssss",
+                            $mainData['register_id'],
+                            $mainData['abstract_id'],
+                            $mainData['sub_themes'],
+                            $mainData['type_presentation'],
+                            $mainData['cat_presentation'],
+                            $mainData['title_paper'],
+                            $mainData['keywords'],
+                            $mainData['abstract_details'],
+                            $mainData['session_name'],
+                            $mainData['created_by'],
+                            $mainData['created_on']
+                        );
             mysqli_stmt_execute($stmt);
 
             // 2. Insert into author_details

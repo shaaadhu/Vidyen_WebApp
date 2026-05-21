@@ -42,7 +42,7 @@ class RegistrationModel
         if (isset($email)) {
             $email = mysqli_real_escape_string($this->db, $email);
 
-            $query = "select count(*) as cntUser from login where `user_email`='$email' AND `flag`='0'";
+            $query = "select count(*) as cntUser from login where `user_email`='$email' AND `flag`=0";
 
             $result = mysqli_query($this->db, $query);
             if (mysqli_num_rows($result)) {
@@ -86,8 +86,8 @@ class RegistrationModel
             $data[$key] = mysqli_real_escape_string($this->db, $value);
         }
 
-        $query = "INSERT INTO `registration`(`registration_code`, `honorofic`, `full_name`, `age`, `gender`, `type_of_delegate`, `designation`, `college_name`, `university_name`, `full_address`, `city`, `state`, `country`, `pincode`, `email`, `phone_number`, `pre_conference`, `podium_lecture`, `scientific_presentation`) 
-                  VALUES ('{$data['code']}','{$data['title1']}','{$data['full_name']}','{$data['age']}','{$data['gender']}','{$data['delegate_type']}','{$data['designation']}','{$data['college_name']}','{$data['university_name']}','{$data['full_address']}','{$data['city']}','{$data['state']}','{$data['country']}','{$data['pincode']}','{$data['email']}','{$data['mobile']}','{$data['pre_conference']}','{$data['podium_lecture']}','{$data['presentation']}')";
+        $query = "INSERT INTO `registration`(`registration_code`, `honorofic`, `full_name`, `age`, `gender`, `type_of_delegate`, `designation`, `college_name`, `university_name`, `full_address`, `city`, `state`, `country`, `pincode`, `email`, `phone_number`, `pre_conference`, `podium_lecture`, `scientific_presentation`,`year`) 
+                  VALUES ('{$data['code']}','{$data['title1']}','{$data['full_name']}','{$data['age']}','{$data['gender']}','{$data['delegate_type']}','{$data['designation']}','{$data['college_name']}','{$data['university_name']}','{$data['full_address']}','{$data['city']}','{$data['state']}','{$data['country']}','{$data['pincode']}','{$data['email']}','{$data['mobile']}','{$data['pre_conference']}','{$data['podium_lecture']}','{$data['presentation']}','{$data['year']}')";
 
         if (mysqli_query($this->db, $query)) {
             // Also insert into login table

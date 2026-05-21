@@ -68,6 +68,7 @@
 
             <form id="registration_vidyen_form" method="POST">
                 <?php echo Csrf::field(); ?>
+                <input type="hidden" name="year" value="<?php echo date('Y'); ?>">
                 <div class="cards p-3">
                     <div role="tabpanel" class="tab-pane" id="dinfo">
                         <div class="row mt-3">

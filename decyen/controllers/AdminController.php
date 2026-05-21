@@ -17,15 +17,7 @@ class AdminController
         }
     }
 
-    // // common function to verify CSRF token for all POST requests in admin controller
-    // protected function verifyCsrf()
-    // {
-    //     $token = $_POST['csrf_token'] ?? '';
 
-    //     if (!Csrf::validateToken($token)) {
-    //         die("Invalid CSRF token");
-    //     }
-    // }
 
     // get all registration details for admin                         (1.REGISTRATION)
     public function admin_reg_view()
@@ -35,7 +27,16 @@ class AdminController
         }
         $user_type = $_SESSION['usertype'];
         $model = new AdminModel;
-        $participants = $model->getAllParticipants();
+        $currentYear = (int)date('Y');
+        $year = isset($_GET['filter_year']) ? $_GET['filter_year'] : (string)$currentYear;
+        $data['year_options'] = [
+            (string)$currentYear      => (string)$currentYear,
+            (string)($currentYear - 1) => (string)($currentYear - 1)
+          
+        ];
+        $data['selected_year'] = $year;
+
+        $participants = $model->getAllParticipants($year);
         $content_file = __DIR__ . '/../views/admin/admin_reg_view.php';
         require_once __DIR__ . '/../views/main.php';
     }

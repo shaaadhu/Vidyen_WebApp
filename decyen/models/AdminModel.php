@@ -12,9 +12,9 @@ class AdminModel
     }
 
     //FOR REGISTRATION VIEW                                     (1.REGISTRATION)
-    public function getAllParticipants()
+    public function getAllParticipants($year)
     {
-        $query = "SELECT * FROM registration ORDER BY id DESC";
+        $query = "SELECT * FROM registration WHERE year=$year ORDER BY id DESC";
         $result = mysqli_query($this->conn, $query);
         return $result;
     }

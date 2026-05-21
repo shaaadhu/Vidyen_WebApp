@@ -10,7 +10,7 @@ class AuthModel {
     }
 
     public function login($email, $password) {
-        $stmt = $this->conn->prepare("SELECT * FROM login WHERE user_email=? AND password=?");
+        $stmt = $this->conn->prepare("SELECT * FROM login WHERE user_email=? AND password=? AND flag='0'");
         $stmt->bind_param("ss", $email, $password);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -19,7 +19,7 @@ class AuthModel {
 
     // updating password and setting status to 2 for reset password
     public function update_password($newpassword, $userid){
-       $query = "UPDATE `login` SET `password`='$newpassword',`status`='2' WHERE `user_id`='$userid'";
+       $query = "UPDATE `login` SET `password`='$newpassword',`status`='2' WHERE `user_id`='$userid' AND flag='0'";
         if (mysqli_query($this->conn, $query)) {
             return true;
         } else {

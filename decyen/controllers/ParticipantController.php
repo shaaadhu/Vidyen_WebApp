@@ -348,7 +348,87 @@ window.location.assign('index.php?controller=participant&action=workshop_submiss
 
         $model = new ParticipantModel;
 
-        // Prepare main data
+        $type = $_POST['type_presentation'];
+        $subtheme = $_POST['sub_themes'];
+
+        $sessionMap = [
+
+    // Oral Presentations for research submission
+    "Oral Presentations for research submission" => [
+
+        "Assessment and Competency-Based Education" => 1,
+        "Teaching–Learning Innovations in the Digital Era" => 2,
+        "Quality Enhancement and Accreditation in Dental Education" => 3,
+        "Interprofessional Education and Collaborative Practice (IPE)" => 4,
+        "AI, Empathy, and Ethics in Modern Dental Practice" => 5,
+        "Faculty Development and Leadership for the Future" => 6
+    ],
+
+    // Oral Presentations for Speciality Research
+    "Oral Presentations for Speciality Research" => [
+
+        "Orthodontics" => 7,
+        "Pedodontics" => 8,
+        "Public Health Dentistry" => 9,
+        "Periodontics" => 10,
+        "Oral Surgery" => 11,
+        "Oral Medicine and Radiology" => 12,
+        "Prosthodontics" => 13,
+        "Implantology" => 14,
+        "Dental Materials" => 15,
+        "Oral Pathology" => 16
+    ],
+
+    // Posters
+    "Posters" => [
+
+        "Assessment and Competency-Based Education" => 17,
+        "Teaching–Learning Innovations in the Digital Era" => 18,
+        "Quality Enhancement and Accreditation in Dental Education" => 19,
+        "Interprofessional Education and Collaborative Practice (IPE)" => 20,
+        "AI, Empathy, and Ethics in Modern Dental Practice" => 21,
+        "Faculty Development and Leadership for the Future" => 22,
+        "Orthodontics" => 23,
+        "Pedodontics" => 24,
+        "Public Health Dentistry" => 25,
+        "Periodontics" => 26,
+        "Oral Surgery" => 27,
+        "Oral Medicine and Radiology" => 28,
+        "Prosthodontics" => 29,
+        "Implantology" => 30,
+        "Dental Materials" => 31,
+        "Oral Pathology" => 32
+    ],
+
+    // Yenvision- Lightning talk
+    "Yenvision- Lightning talk" => [
+
+        "Assessment and Competency-Based Education" => 33,
+        "Teaching–Learning Innovations in the Digital Era" => 34,
+        "Quality Enhancement and Accreditation in Dental Education" => 35,
+        "Interprofessional Education and Collaborative Practice (IPE)" => 36,
+        "AI, Empathy, and Ethics in Modern Dental Practice" => 37,
+        "Faculty Development and Leadership for the Future" => 38
+    ]
+];
+
+
+
+$sessionNumber = $sessionMap[$type][$subtheme] ?? 1;
+
+$sessionPrefix = "Session" . $sessionNumber;
+
+
+        $total = $model->getSubmissionCount($type, $subtheme);
+
+        $groupIndex = floor($total / 5);
+
+        $letters = range('A', 'Z');
+
+        $letter = $letters[$groupIndex] ?? 'Z';
+
+        $sessionName = $sessionPrefix . " " . $letter;
+
        // Prepare Main Abstract Data
         $mainData = [
             'register_id'       => $_POST['register_id'],
@@ -359,6 +439,7 @@ window.location.assign('index.php?controller=participant&action=workshop_submiss
             'title_paper'       => $_POST['title_paper'],
             'keywords'          => $_POST['keywords'],
             'abstract_details'  => $_POST['abtract_details'], // Note: Model handles escaping
+            'session_name'      => $sessionName,
             'created_by'        => $_SESSION['user_id'],
             'created_on'        => date('d-m-Y')
         ];
@@ -383,19 +464,19 @@ window.location.assign('index.php?controller=participant&action=workshop_submiss
         if ($model->saveAbstractSubmission($mainData, $authorData)) {
 
         ?>
-<script type="text/javascript">
-alert("Thank you for your submission. We will be in touch with you soon.");
-window.location.assign('index.php?controller=participant&action=abstract_view');
-</script>
-<?php
-                    
-                } else {
-                ?>
-<script type="text/javascript">
-alert("Not submitted.");
-window.location.assign('index.php?controller=participant&action=abstract_submission');
-</script>
-<?php
+        <script type="text/javascript">
+        alert("Thank you for your submission. We will be in touch with you soon.");
+        window.location.assign('index.php?controller=participant&action=abstract_view');
+        </script>
+        <?php
+                            
+                        } else {
+                        ?>
+        <script type="text/javascript">
+        alert("Not submitted.");
+        window.location.assign('index.php?controller=participant&action=abstract_submission');
+        </script>
+        <?php
                 
                 }
     }
@@ -435,39 +516,7 @@ window.location.assign('index.php?controller=participant&action=abstract_submiss
            $model = new ParticipantModel;
            $coauthor_result = $model->coAuthorDetails($userId);
 
-            // if(mysqli_num_rows($coauthor_result) > 0){
-            //     while ($row = mysqli_fetch_assoc($coauthor_result)){
-
-            //         $first_names  = explode(',', $row['first_name']);
-            //         $middle_names = explode(',', $row['middle_name']);
-            //         $last_names   = explode(',', $row['last_name']);
-
-            //         // Remove first element (Present Author)
-            //         array_shift($first_names);
-            //         array_shift($middle_names);
-            //         array_shift($last_names);
-
-            //         // Get count of co-authors
-            //         $count = count($first_names);
-
-            //         for ($i = 0; $i < $count; $i++){
-
-
-            //             $fname = trim($first_names[$i]);
-            //             $mname = trim($middle_names[$i]);
-            //             $lname = trim($last_names[$i]);
-
-                        
-            //             $full_name = 'Dr.'. ' ' . $fname . ' ' . $mname . ' ' . $lname;
-
-            //         }
-
-            
-
-
-            //     }
-
-            // }
+           
             
         $coAuthors = [];
         if ($coauthor_result) {

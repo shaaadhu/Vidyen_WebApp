@@ -42,16 +42,12 @@
                                 <label for="first_name"><b>Sub-themes/categories</b></label>
                                 <select id="sub_themes" name="sub_themes" required class="form-control">
                                     <option value="">Select Subtheme categories..</option>
-                                    <option value="Blended Learning Strategies in Dental Education">Blended Learning Strategies in Dental Education</option>
-                                    <option value="Virtual Simulations and Hands-On Training: Bridging the Gap">Virtual Simulations and Hands-On Training: Bridging the Gap</option>
-                                    <option value="Enhancing Student Engagement in Hybrid Learning Environments">Enhancing Student Engagement in Hybrid Learning Environments</option>
-                                    <option value="Artificial Intelligence in dentistry">Artificial Intelligence in dentistry</option>
-                                    <option value="Quality assurance in dentistry and its applications in Blended Learning">Quality assurance in dentistry and its applications in Blended Learning</option>
-                                    <option value="Technology-Driven Innovations in Dental Education">Technology-Driven Innovations in Dental Education</option>
-                                    <option value="Assessment and Feedback in Hybrid Learning Models">Assessment and Feedback in Hybrid Learning Models</option>
-                                    <option value="Faculty Development for Effective Hybrid Teaching">Faculty Development for Effective Hybrid Teaching</option>
-                                    <option value="Global Collaboration in Hybrid Dental Education">Global Collaboration in Hybrid Dental Education</option>
-                                    <option value="Speciality Presentation">Speciality Presentation</option>
+                                    <option value="Assessment and Competency-Based Education">Assessment and Competency-Based Education</option>
+                                    <option value="Teaching–Learning Innovations in the Digital Era">Teaching–Learning Innovations in the Digital Era</option>
+                                    <option value="Quality Enhancement and Accreditation in Dental Education">Quality Enhancement and Accreditation in Dental Education</option>
+                                    <option value="Interprofessional Education and Collaborative Practice (IPE)">Interprofessional Education and Collaborative Practice (IPE)</option>
+                                    <option value="AI, Empathy, and Ethics in Modern Dental Practice">AI, Empathy, and Ethics in Modern Dental Practice</option>
+                                    <option value="Faculty Development and Leadership for the Future">Faculty Development and Leadership for the Future</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mt-5">
@@ -385,30 +381,7 @@
     });
 
 
-    // function validation(){
-
-
-    // }
-    // $(document).on('submit','#abstract_form',function(e) {
-    //    word_check();
-    //   keyword_check();
-
-    //     if (word_err == true && word_errkey == true)  {
-    //        $.ajax({
-    //         url:"abstract_submission.php",
-    //         type:"POST",
-    //         data:$(this).serialize(),
-    //         success:function(data) {
-
-    //         }
-    //        });
-
-    //     }else{
-
-    //                return false;
-    //             }
-
-    // });
+   
     
 document.getElementById("type_presentation").addEventListener("change", function () {
 
@@ -475,17 +448,7 @@ document.getElementById("type_presentation").addEventListener("change", function
             "Quality Enhancement and Accreditation in Dental Education",
             "Interprofessional Education and Collaborative Practice (IPE)",
             "AI, Empathy, and Ethics in Modern Dental Practice",
-            "Faculty Development and Leadership for the Future",
-            "Orthodontics",
-            "Pedodontics",
-            "Public Health Dentistry",
-            "Periodontics",
-            "Oral Surgery",
-            "Oral Medicine and Radiology",
-            "Prosthodontics",
-            "Implantology",
-            "Dental Materials",
-            "Oral Pathology"
+            "Faculty Development and Leadership for the Future"
         ];
     }
 
