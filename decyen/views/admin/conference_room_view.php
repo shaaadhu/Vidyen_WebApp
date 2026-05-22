@@ -27,7 +27,7 @@
                             <td>
                                 <a class="btn btn-outline-primary view-details" data-id="<?php echo $room['id']; ?>">View</a>
                                 <a href="index.php?controller=admin&action=conference_room_edit&id=<?php echo $room['id']; ?>" class="btn btn-outline-warning">Edit</a>
-                                <button class="btn btn-outline-danger delete-btn" data-id="<?php echo $room['id']; ?>" data-csrf="<?php echo $_SESSION['csrf_token']; ?>">>Delete</button>
+                                <button class="btn btn-outline-danger delete-btn" data-id="<?php echo $room['id']; ?>" data-csrf="<?php echo $_SESSION['csrf_token']; ?>">Delete</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>

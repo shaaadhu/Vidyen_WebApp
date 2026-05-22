@@ -1,5 +1,6 @@
 <form role="form" id="add_comment_form">
     <?php echo Csrf::field(); ?>
+    <input type="hidden" name="session_name" value="<?= htmlspecialchars($abstract['session_name']) ?>">
     <div class="row mt-3">
         <div class="col-md-6">
             <label class="form-label"><b>Participant Id</b></label>
@@ -32,6 +33,16 @@
             <input type="text" class="form-control bg-white" value="<?= htmlspecialchars($abstract['keywords']) ?>" readonly>
         </div>
     </div>
+
+
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <label class="form-label"><b>Session Alloted</b></label>
+            <input type="text" class="form-control bg-white" value="<?= htmlspecialchars($abstract['session_name']) ?>" readonly>
+        </div>
+    </div>
+
+
 
     <div class="mt-3">
         <label><b>Abstract Details</b></label>                

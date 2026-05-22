@@ -9,6 +9,44 @@ class ReviewerModel {
         $this->conn = $config->db_conn;
     }
 
+    private function createConferenceRoom($session) {
+        // 1. Clean the input variable
+        $session = mysqli_real_escape_string($this->conn, $session);
+        $currentDate = mysqli_real_escape_string($this->conn, $currentDate);
+        
+        // 2. Check if it already exists
+        $checkQuery = "SELECT id FROM conference_room 
+                    WHERE name = '$session' 
+                        AND type = 'Scientific session rooms' 
+                    LIMIT 1";
+                    
+        $checkResult = mysqli_query($this->conn, $checkQuery);
+        
+        if (!$checkResult) {
+           return false;
+        }
+        
+        // 3. If it already exists, just return false (avoid inserting)
+        if (mysqli_num_rows($checkResult) > 0) {
+            return true; 
+        }
+        
+        // 4. If it doesn't exist, run the INSERT query
+        // NOTE: Change 'deleted', 'created_on' or other columns to match your table fields
+        $insertQuery = "INSERT INTO conference_room (name, type,created_by,created_on) 
+                        VALUES ('$session', 'Scientific session rooms','admin','$currentDate')";
+                        
+        $insertResult = mysqli_query($this->conn, $insertQuery);
+        
+        if (!$insertResult) {
+            return false;
+        }
+        
+        return true; // Successfully inserted!
+    }
+
+   
+
     // get assigned abstract details
     public function getAssignedAbstracts($reviewerId) {
         $reviewerId = mysqli_real_escape_string($this->conn, $reviewerId);
@@ -27,14 +65,13 @@ class ReviewerModel {
     // get abstract details for evaluation
     public function getAbstractForEvaluation($id) {
         $id = mysqli_real_escape_string($this->conn, $id);
-        $query = "SELECT registration_id, sub_theme, type_of_presentation, paper_title, keywords, paper_abstract 
-                  FROM abstract WHERE abstract_id = '$id'";
+        $query = "SELECT * FROM abstract WHERE abstract_id = '$id'";
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_assoc($result);
     }
 
     // save abstract evaluation
-    public function saveEvaluation($abstractCode, $comment) {
+    public function saveEvaluation($abstractCode, $comment, $session_name) {
         // Start Transaction
         mysqli_begin_transaction($this->conn);
 
@@ -48,6 +85,11 @@ class ReviewerModel {
             $stmt2 = mysqli_prepare($this->conn, "UPDATE abstract SET status = 2 WHERE abstract_id = ?");
             mysqli_stmt_bind_param($stmt2, "s", $abstractCode);
             mysqli_stmt_execute($stmt2);
+
+            $roomCreated = $this->createConferenceRoom($session_name);
+            if (!$roomCreated) {
+                throw new Exception("Conference room creation failed.");
+            }
 
             // Commit changes
             mysqli_commit($this->conn);
