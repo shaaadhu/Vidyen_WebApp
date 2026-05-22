@@ -60,7 +60,8 @@ class ReviewerController
 
             $abstractCode = $_POST['abstract_code'] ?? '';
             $comment = $_POST['comment'] ?? '';
-            $session_name = $_POST['session_name'] ?? ''; 
+            $session_name = $_POST['session_name'] ?? '';
+            $decision = $_POST['decision'] ?? 'accept'; 
 
             if (empty($abstractCode) || empty($comment)) {
                 echo json_encode(['status' => 'error', 'message' => 'Missing data']);
@@ -73,7 +74,7 @@ class ReviewerController
             }
             // 3. Logic: Update DB
             $model = new ReviewerModel();
-            $success = $model->saveEvaluation($abstractCode, $comment, $session_name);
+            $success = $model->saveEvaluation($abstractCode, $comment, $session_name, $decision);
 
             // 4. Response
             if ($success) {
