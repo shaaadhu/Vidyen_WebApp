@@ -18,8 +18,8 @@
                         <select name="room_type" class="form-control" required>
                             <option value="">Choose type of conference</option>
                             <option value="Conference Hall">Conference Hall</option>
-                            <option value="Pre conference hall">Pre conference hall</option>
-                            <option value="Scientific session rooms">Scientific session rooms</option>
+                            <option value="Pre Conference Hall">Pre Conference Hall</option>
+                            <option value="Scientific Session Rooms">Scientific Session Rooms</option>
                             <option value="Workshops">Workshops</option>
                         </select>
                     </div>

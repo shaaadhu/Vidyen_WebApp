@@ -20,7 +20,7 @@
                         <label><b>Type of Conference</b></label>
                         <select name="room_type" class="form-control" required>
                             <?php 
-                            $types = ['Conference Hall', 'Pre conference hall', 'Scientific session rooms', 'Workshops'];
+                            $types = ['Conference Hall', 'Pre Conference Hall', 'Scientific Session Rooms', 'Workshops'];
                             foreach($types as $t): ?>
                                 <option value="<?= $t ?>" <?= ($room['type'] == $t) ? 'selected' : '' ?>><?= $t ?></option>
                             <?php endforeach; ?>

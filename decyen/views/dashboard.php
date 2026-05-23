@@ -1,9 +1,7 @@
 <div class="content-wrapper bg-light p-4">
-    <!-- <h2 class="text-primary mb-4">Dashboard</h2> -->
-     <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-primary mb-0">Dashboard</h2>
         
-        <!-- Only displays this dropdown selector block if the user is logged in as an admin -->
         <?php if ($user_type == 'admin'): ?>
            <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border">
                 <input type="hidden" name="controller" value="authentication">
@@ -27,64 +25,93 @@
             <h4 class="mb-0">Conference Rooms</h4>  
         </div>
         <div class="card-body">
-            <?php if (!empty($data['rooms'])): ?>
-                <ul class="nav nav-tabs" id="roomTabs" role="tablist">
-                    <?php
-                    $active = true;
-                    foreach ($data['rooms'] as $type => $rooms):
-                        // Create a clean ID: Remove spaces and special chars
-                        $tid = "room-" . preg_replace('/[^A-Za-z0-9]/', '', $type);
-                    ?>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link <?= $active ? 'active' : '' ?>"
-                                id="<?= $tid ?>-tab"
-                                data-bs-toggle="tab"
-                                href="#<?= $tid ?>"
-                                role="tab"
-                                aria-controls="<?= $tid ?>"
-                                aria-selected="<?= $active ? 'true' : 'false' ?>">
-                                <?= htmlspecialchars($type) ?>
-                            </a>
-                        </li>
-                    <?php $active = false;
-                    endforeach; ?>
-                </ul>
+            <?php 
+            $roomTypes = [
+                'Conference Hall',
+                'Pre Conference Hall',
+                'Workshops',
+                'Scientific Session Rooms'
+            ];
+            ?>
 
-                <div class="tab-content pt-3" id="roomTabsContent">
-                    <?php
-                    $active = true;
-                    foreach ($data['rooms'] as $type => $rooms):
-                        $tid = "room-" . preg_replace('/[^A-Za-z0-9]/', '', $type);
-                    ?>
-                        <div class="tab-pane fade <?= $active ? 'show active' : '' ?>"
-                            id="<?= $tid ?>"
-                            role="tabpanel"
-                            aria-labelledby="<?= $tid ?>-tab">
+            <!-- TABS: always show all 4 -->
+            <ul class="nav nav-tabs" id="roomTabs" role="tablist">
+                <?php 
+                $firstActive = true;
+                foreach ($roomTypes as $type):
+                    $tid = "room-" . strtolower(preg_replace('/[^A-Za-z0-9]/', '', $type));
+                ?>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link <?= $firstActive ? 'active' : '' ?>"
+                            id="<?= $tid ?>-tab"
+                            data-bs-toggle="tab"
+                            href="#<?= $tid ?>"
+                            role="tab"
+                            aria-controls="<?= $tid ?>"
+                            aria-selected="<?= $firstActive ? 'true' : 'false' ?>">
+                            <?= htmlspecialchars($type) ?>
+                        </a>
+                    </li>
+                <?php $firstActive = false; endforeach; ?>
+            </ul>
+
+            <!-- CONTENT: show data or under construction -->
+            <div class="tab-content pt-3" id="roomTabsContent">
+                <?php 
+                $firstActive = true;
+                foreach ($roomTypes as $type):
+                    $tid = "room-" . strtolower(preg_replace('/[^A-Za-z0-9]/', '', $type));
+                    $rooms = $data['rooms'][$type] ?? [];
+                ?>
+                    <div class="tab-pane fade <?= $firstActive ? 'show active' : '' ?>"
+                        id="<?= $tid ?>"
+                        role="tabpanel"
+                        aria-labelledby="<?= $tid ?>-tab">
+
+                        <?php if (!empty($rooms)): ?>
                             <ul class="mt-3">
                                 <?php foreach ($rooms as $room): ?>
                                     <li class="mb-2">
-                                        <strong><?= htmlspecialchars($room['name']) ?></strong>:
-                                        <?php
-                                        $links = explode("\n", trim($room['links']));
-                                        $html_links = [];
-                                        foreach ($links as $link) {
-                                            $link = trim($link);
-                                            if (!$link) continue;
-                                            $url = (preg_match('/^https?:\/\//i', $link)) ? $link : 'https://' . $link;
-                                            $html_links[] = '<a href="' . htmlspecialchars($url) . '" target="_blank">' . htmlspecialchars($link) . '</a>';
-                                        }
-                                        echo implode(', ', $html_links);
-                                        ?>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span>
+                                                <strong><?= htmlspecialchars($room['name']) ?></strong>:
+                                                <?php
+                                                $links = explode("\n", trim($room['links']));
+                                                $html_links = [];
+                                                foreach ($links as $link) {
+                                                    $link = trim($link);
+                                                    if (!$link) continue;
+                                                    $url = (preg_match('/^https?:\/\//i', $link)) ? $link : 'https://' . $link;
+                                                    $html_links[] = '<a href="' . htmlspecialchars($url) . '" target="_self">' . htmlspecialchars($link) . '</a>';
+                                                }
+                                                echo implode(', ', $html_links);
+                                                ?>
+                                            </span>
+                                            <?php if ($user_type == 'admin'): ?>
+                                                <a href="index.php?controller=admin&action=conference_room_edit&id=<?= $room['id'] ?>" 
+                                                   class="btn btn-sm btn-outline-warning py-0 px-1" 
+                                                   title="Edit Room">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                            <?php endif; ?>
+                                        </div>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
-                        </div>
-                    <?php $active = false;
-                    endforeach; ?>
-                </div>
-            <?php endif; ?>
+                        <?php else: ?>
+                            <div class="text-center py-4">
+                                <i class="fa-solid fa-helmet-safety fa-2x text-warning mb-2"></i>
+                                <p class="text-muted fw-bold">Under Construction</p>
+                                <small class="text-muted"> Will be Available Soon.</small>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                <?php $firstActive = false; endforeach; ?>
+            </div>
+
         </div>
-    </div>
+    </div>                     
 
     <div class="row mt-4">
         <?php foreach ($data['stats'] as $label => $value): ?>

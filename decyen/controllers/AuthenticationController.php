@@ -76,8 +76,7 @@ class AuthenticationController
         $userid = $_SESSION['user_id'];
         $model = new DashboardModel();
         $data = [];
-        // $year = $_GET['filter_year'] ?? '2025';
-         $currentYear = (int)date('Y');
+        $currentYear = (int)date('Y');
          $year = isset($_GET['filter_year']) ? $_GET['filter_year'] : (string)$currentYear;
 
         // Pass year options to view: current year + 2 previous years
@@ -115,9 +114,9 @@ class AuthenticationController
             $label = str_replace(' Reviewer', '', $rev_type);
             $data['reviewer_label'] = $label;
             $data['stats'] = [
-                "Total $label"    => $model->getCount('assign_reviewer', "reviewer_id='$userid'"),
-                "Pending $label"  => $model->getCount('assign_reviewer', "reviewer_id='$userid' AND status!=1"),
-                "Reviewed $label" => $model->getCount('assign_reviewer', "reviewer_id='$userid' AND status=1")
+                "Total $label"    => $model->getCount('assign_reviewer', "reviewer_id='$userid' AND year='$year'"),
+                "Pending $label"  => $model->getCount('assign_reviewer', "reviewer_id='$userid' AND status!=1 AND year='$year'"),
+                "Reviewed $label" => $model->getCount('assign_reviewer', "reviewer_id='$userid' AND status=1 AND year='$year'")
             ];
         } 
         $action='dashboard';

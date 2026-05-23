@@ -42,7 +42,7 @@ class RegistrationModel
         if (isset($email)) {
             $email = mysqli_real_escape_string($this->db, $email);
 
-            $query = "select count(*) as cntUser from login where `user_email`='$email' AND `flag`=0";
+            $query = "select count(*) as cntUser from registration where `email`='$email' AND `flag`= '0'";
 
             $result = mysqli_query($this->db, $query);
             if (mysqli_num_rows($result)) {

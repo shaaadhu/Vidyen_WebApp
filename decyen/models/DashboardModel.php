@@ -26,9 +26,9 @@ class DashboardModel {
         $rooms = [];
         while ($row = mysqli_fetch_assoc($result)) {
             $rooms[$row['type']][] = $row;
+        }
+      return $rooms;
     }
-    return $rooms;
-}
     public function getCount($table, $where = "") {
         $query = "SELECT count(*) as total FROM `$table` " . ($where ? "WHERE $where" : "");
         $res = mysqli_query($this->db, $query);
