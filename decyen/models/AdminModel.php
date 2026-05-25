@@ -87,15 +87,15 @@ class AdminModel
     }
 
     // assign reviewer to pre-conference submission by admin
-    public function assignPreConferenceReviewer($participantId, $preconferencetId, $reviewerId) 
+    public function assignPreConferenceReviewer($participantId, $preconferencetId, $reviewerId, $currentYear)
     {
         // Start transaction to ensure both queries succeed
         mysqli_begin_transaction($this->conn);
 
         try {
             // 1. Insert into assign_reviewer
-            $stmt1 = mysqli_prepare($this->conn, "INSERT INTO assign_reviewer (registration_id, abstract_id, reviewer_id) VALUES (?, ?, ?)");
-            mysqli_stmt_bind_param($stmt1, "sss", $participantId, $preconferencetId, $reviewerId);
+            $stmt1 = mysqli_prepare($this->conn, "INSERT INTO assign_reviewer (registration_id, abstract_id, reviewer_id, year) VALUES (?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt1, "ssss", $participantId, $preconferencetId, $reviewerId, $currentYear);
             mysqli_stmt_execute($stmt1);
 
             // 2. Update status in pre_conference
@@ -155,14 +155,14 @@ class AdminModel
     }
 
      // assign reviewer to workshop submission by admin
-    public function assignWorkshopReviewer($participantId, $abstractId, $reviewerId) {
+    public function assignWorkshopReviewer($participantId, $abstractId, $reviewerId, $currentYear) {
         // Start a transaction
         mysqli_begin_transaction($this->conn);
 
         try {
             // 1. Insert into assign_reviewer table
-            $stmt1 = mysqli_prepare($this->conn, "INSERT INTO assign_reviewer (registration_id, abstract_id, reviewer_id) VALUES (?, ?, ?)");
-            mysqli_stmt_bind_param($stmt1, "sss", $participantId, $abstractId, $reviewerId);
+            $stmt1 = mysqli_prepare($this->conn, "INSERT INTO assign_reviewer (registration_id, abstract_id, reviewer_id, year) VALUES (?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt1, "ssss", $participantId, $abstractId, $reviewerId, $currentYear);
             mysqli_stmt_execute($stmt1);
 
             // 2. Update status in workshop table
@@ -310,15 +310,15 @@ class AdminModel
     }
 
     // assign reviewer to abstract submission by admin
-    public function assignAbstractReviewer($participant_id, $abstract_code, $reviewer_id)
+    public function assignAbstractReviewer($participant_id, $abstract_code, $reviewer_id, $currentYear)
     {
         // Start Transaction
         mysqli_begin_transaction($this->conn);
 
         try {
             // 1. Insert into assign_reviewer table
-            $stmt1 = $this->conn->prepare("INSERT INTO `assign_reviewer` (`registration_id`, `abstract_id`, `reviewer_id`) VALUES (?, ?, ?)");
-            $stmt1->bind_param("sss", $participant_id, $abstract_code, $reviewer_id);
+            $stmt1 = $this->conn->prepare("INSERT INTO `assign_reviewer` (`registration_id`, `abstract_id`, `reviewer_id`, `year`) VALUES (?, ?, ?, ?)");
+            $stmt1->bind_param("ssss", $participant_id, $abstract_code, $reviewer_id, $currentYear);
             $stmt1->execute();
 
             // 2. Update abstract status to 1 (Assigned)

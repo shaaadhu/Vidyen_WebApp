@@ -195,6 +195,7 @@ class AdminController
         $participantId = $_POST['participant_id'] ?? '';
         $preconferencetId    = $_POST['abstract_code'] ?? '';
         $reviewerId    = $_POST['reviewers'] ?? '';
+        $currentYear = (int)date('Y');
 
         if (empty($participantId) || empty($preconferencetId) || empty($reviewerId)) {
             echo "Missing required data";
@@ -210,7 +211,7 @@ class AdminController
 
         $model = new AdminModel;
         // 3. Logic: Model call
-        $result = $model->assignPreConferenceReviewer($participantId, $preconferencetId, $reviewerId);
+        $result = $model->assignPreConferenceReviewer($participantId, $preconferencetId, $reviewerId, $currentYear);
 
         // 4. Response
         if ($result) {
@@ -293,6 +294,7 @@ class AdminController
         $participantId = $_POST['participant_id'] ?? '';
         $abstractId    = $_POST['abstract_code'] ?? '';
         $reviewerId    = $_POST['reviewers'] ?? '';
+        $currentYear = (int)date('Y');
 
         if (empty($participantId) || empty($abstractId) || empty($reviewerId)) {
             echo "Missing required data";
@@ -306,7 +308,7 @@ class AdminController
 
         $model = new AdminModel;
         // 3. Call Model Logic
-        $result = $model->assignWorkshopReviewer($participantId, $abstractId, $reviewerId);
+        $result = $model->assignWorkshopReviewer($participantId, $abstractId, $reviewerId, $currentYear);
 
         // 4. Send Response back to AJAX
         if ($result) {
@@ -433,6 +435,7 @@ class AdminController
             $participant_id = $_POST['participant_id'] ?? '';
             $abstract_code  = $_POST['abstract_code'] ?? '';
             $reviewer_id    = $_POST['reviewers'] ?? '';
+            $currentYear = (int)date('Y');
 
             if (empty($participant_id) || empty($abstract_code) || empty($reviewer_id)) {
                 echo "Missing required data";
@@ -444,7 +447,7 @@ class AdminController
                 die("Security error: Invalid CSRF token");
             }
             $model = new AdminModel();
-            $result = $model->assignAbstractReviewer($participant_id, $abstract_code, $reviewer_id);
+            $result = $model->assignAbstractReviewer($participant_id, $abstract_code, $reviewer_id, $currentYear    );
 
             if ($result) {
                 echo "Successfully assigned and updated";
