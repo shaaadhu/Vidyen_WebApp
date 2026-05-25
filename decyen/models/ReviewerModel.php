@@ -49,10 +49,10 @@ class ReviewerModel {
    
 
     // get assigned abstract details
-    public function getAssignedAbstracts($reviewerId,$currentYear) {
+    public function getAssignedAbstracts($reviewerId,$year) {
         $reviewerId = mysqli_real_escape_string($this->conn, $reviewerId);
-        $currentYear = mysqli_real_escape_string($this->conn, $currentYear);
-        $query = "SELECT * FROM assign_reviewer WHERE reviewer_id = '$reviewerId' AND year = '$currentYear'";
+        $year = mysqli_real_escape_string($this->conn, $year);
+        $query = "SELECT * FROM assign_reviewer WHERE reviewer_id = '$reviewerId' AND year = '$year'";
         $result = mysqli_query($this->conn, $query);
         
         $data = [];
@@ -113,10 +113,10 @@ class ReviewerModel {
     }
 
     // get assigned PreConference details
-    public function getPreConferenceAssignments($reviewerId, $currentYear) {
+    public function getPreConferenceAssignments($reviewerId, $year) {
         $reviewerId = mysqli_real_escape_string($this->conn, $reviewerId);
         // We select the assignments specifically for this reviewer
-        $query = "SELECT * FROM assign_reviewer WHERE reviewer_id = '$reviewerId' AND year = '$currentYear'";
+        $query = "SELECT * FROM assign_reviewer WHERE reviewer_id = '$reviewerId' AND year = '$year'";
         $result = mysqli_query($this->conn, $query);
         
         $assignments = [];
@@ -162,10 +162,10 @@ class ReviewerModel {
     }
 
     // get assigned Workshop details
-    public function getWorkshopAssignments($reviewerId, $currentYear) {
+    public function getWorkshopAssignments($reviewerId, $year) {
         $reviewerId = mysqli_real_escape_string($this->conn, $reviewerId);
-        $currentYear = mysqli_real_escape_string($this->conn, $currentYear);
-        $query = "SELECT * FROM assign_reviewer WHERE reviewer_id = '$reviewerId' AND year = '$currentYear'";
+        $year = mysqli_real_escape_string($this->conn, $year);
+        $query = "SELECT * FROM assign_reviewer WHERE reviewer_id = '$reviewerId' AND year = '$year'";
         $result = mysqli_query($this->conn, $query);
         
         $assignments = [];

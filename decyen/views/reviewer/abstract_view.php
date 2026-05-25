@@ -1,9 +1,24 @@
 <div class="content-wrapper bg-light">
     <div class="col-12 grid-margin">
         <div class="card shadow-sm">
-            <div class="card-title pt-3 ps-3 text-primary">
-                <h3>Assigned Abstract</h3>
-            </div>
+<div class="card-title pt-3 ps-3 text-primary d-flex justify-content-between align-items-center pe-3">
+    <h3 class="mb-0">Assigned Abstract</h3>
+
+    <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">
+        <input type="hidden" name="controller" value="reviewer">
+        <input type="hidden" name="action" value="abstract_view"> 
+        <label for="filter_year" class="me-2 fw-bold text-secondary mb-0 small text-nowrap">Filter by Year:</label>
+        <select name="filter_year" id="filter_year" class="form-select form-select-sm"
+                style="width: 110px;" onchange="this.form.submit()">
+            <?php foreach ($data['year_options'] as $val => $label): ?>
+                <option value="<?= htmlspecialchars($val) ?>"
+                    <?= ($data['selected_year'] === (string)$val) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($label) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </form>
+</div>
 
             <div class="card-body">
                 <div class="table-responsive mt-3">
@@ -88,7 +103,7 @@
                 }
             });
         });
-
+  
         $('#btn_close').click(function() {
             location.reload();
         });

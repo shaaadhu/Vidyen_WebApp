@@ -3,6 +3,18 @@ require_once __DIR__ . '/../models/ReviewerModel.php';
 
 class ReviewerController
 {
+     private  function year_filter(){
+          $currentYear = (int)date('Y');
+        $selectedYear = isset($_GET['filter_year']) ? $_GET['filter_year'] : (string)$currentYear;
+
+        return [
+            'year_options' => [
+                (string)$currentYear        => (string)$currentYear,
+                (string)($currentYear - 1)  => (string)($currentYear - 1)             
+            ],
+            'selected_year' => $selectedYear,
+        ];
+    }
 
     public function isAuth()
     {
@@ -21,9 +33,11 @@ class ReviewerController
             $userid = $_SESSION['user_id'];
             $user_type = $_SESSION['usertype'];
             $rev_type = 'Abstract Reviewer';
-            $currentYear = (int)date('Y');
             $model = new ReviewerModel();
-            $abstracts = $model->getAssignedAbstracts($userid,$currentYear);
+            $data = [];
+            $data = array_merge($data, $this->year_filter());
+            $year = $data['selected_year'];
+            $abstracts = $model->getAssignedAbstracts($userid,$year);
 
 
             // 3. Load View
@@ -96,9 +110,12 @@ class ReviewerController
             $userId = $_SESSION['user_id'];
             $user_type = $_SESSION['usertype'];
             $rev_type = 'PreConference Reviewer';
-            $currentYear = (int)date('Y');
+            // $currentYear = (int)date('Y');
             $model = new ReviewerModel();
-            $assignments = $model->getPreConferenceAssignments($userId, $currentYear);
+             $data = [];
+            $data = array_merge($data, $this->year_filter());
+            $year = $data['selected_year'];
+            $assignments = $model->getPreConferenceAssignments($userId, $year);
 
             // 3. Load View
             $content_file = __DIR__ . '/../views/reviewer/preconference_view.php';
@@ -174,10 +191,13 @@ class ReviewerController
             $reviewerId = $_SESSION['user_id'];
             $user_type = $_SESSION['usertype'];
             $rev_type = 'Workshop Reviewer';
-             $currentYear = (int)date('Y');
+            //  $currentYear = (int)date('Y');
 
             $model = new ReviewerModel();
-            $assignments = $model->getWorkshopAssignments($reviewerId, $currentYear);
+             $data = [];
+            $data = array_merge($data, $this->year_filter());
+            $year = $data['selected_year'];
+            $assignments = $model->getWorkshopAssignments($reviewerId, $year);
 
             // 3. Load View
             $content_file = __DIR__ . '/../views/reviewer/workshop_view.php';

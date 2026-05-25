@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-primary mb-0">Dashboard</h2>
         
-        <?php if ($user_type == 'admin'): ?>
+        <?php if ($user_type == 'admin' || $user_type == 'reviewer'): ?>
            <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border">
                 <input type="hidden" name="controller" value="authentication">
                 <input type="hidden" name="action" value="dashboard">
