@@ -21,8 +21,9 @@ class ReviewerController
             $userid = $_SESSION['user_id'];
             $user_type = $_SESSION['usertype'];
             $rev_type = 'Abstract Reviewer';
+            $currentYear = (int)date('Y');
             $model = new ReviewerModel();
-            $abstracts = $model->getAssignedAbstracts($userid);
+            $abstracts = $model->getAssignedAbstracts($userid,$currentYear);
 
 
             // 3. Load View
@@ -95,8 +96,9 @@ class ReviewerController
             $userId = $_SESSION['user_id'];
             $user_type = $_SESSION['usertype'];
             $rev_type = 'PreConference Reviewer';
+            $currentYear = (int)date('Y');
             $model = new ReviewerModel();
-            $assignments = $model->getPreConferenceAssignments($userId);
+            $assignments = $model->getPreConferenceAssignments($userId, $currentYear);
 
             // 3. Load View
             $content_file = __DIR__ . '/../views/reviewer/preconference_view.php';
@@ -172,9 +174,10 @@ class ReviewerController
             $reviewerId = $_SESSION['user_id'];
             $user_type = $_SESSION['usertype'];
             $rev_type = 'Workshop Reviewer';
+             $currentYear = (int)date('Y');
 
             $model = new ReviewerModel();
-            $assignments = $model->getWorkshopAssignments($reviewerId);
+            $assignments = $model->getWorkshopAssignments($reviewerId, $currentYear);
 
             // 3. Load View
             $content_file = __DIR__ . '/../views/reviewer/workshop_view.php';

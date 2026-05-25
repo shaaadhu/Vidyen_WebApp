@@ -89,7 +89,7 @@
                                             </span>
                                             <?php if ($user_type == 'admin'): ?>
                                                 <a href="index.php?controller=admin&action=conference_room_edit&id=<?= $room['id'] ?>" 
-                                                   class="btn btn-sm btn-outline-warning py-0 px-1" 
+                                                   class="btn btn-sm btn-secondary btn-outline-link py-0 px-1" 
                                                    title="Edit Room">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
@@ -100,9 +100,9 @@
                             </ul>
                         <?php else: ?>
                             <div class="text-center py-4">
-                                <i class="fa-solid fa-helmet-safety fa-2x text-warning mb-2"></i>
-                                <p class="text-muted fw-bold">Under Construction</p>
-                                <small class="text-muted"> Will be Available Soon.</small>
+                                <!-- <i class="fa-solid fa-helmet-safety fa-2x text-warning mb-2"></i> -->
+                                <!-- <p class="text-muted fw-bold">Under Construction</p> -->
+                                <small class="text-muted fw-bold"> Will be Available Soon.</small>
                             </div>
                         <?php endif; ?>
 
