@@ -417,8 +417,8 @@ class AdminModel
 
     
     // get all conference room details for admin view                         (6. CONFERENCE ROOM)
-    public function getAllActiveRooms() {
-        $query = "SELECT * FROM conference_room WHERE deleted = 0";
+    public function getAllActiveRooms($year) {
+        $query = "SELECT * FROM conference_room WHERE deleted = 0 AND YEAR(STR_TO_DATE(created_on, '%d-%m-%Y')) = $year ";
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }

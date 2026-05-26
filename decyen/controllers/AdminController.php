@@ -569,7 +569,10 @@ class AdminController
         if ($this->isAuth()) {
             $user_type = $_SESSION['usertype'];
             $model = new AdminModel;
-            $rooms = $model->getAllActiveRooms();
+            $data = [];
+            $data = array_merge($data, $this->year_filter());
+            $year = $data['selected_year'];
+            $rooms = $model->getAllActiveRooms($year);
 
             // Pass data to the view
             // require_once __DIR__ . '/../views/admin/conference_room_view.php';
