@@ -17,18 +17,7 @@ class AdminController
         }
     }
 
-    private  function year_filter(){
-          $currentYear = (int)date('Y');
-        $selectedYear = isset($_GET['filter_year']) ? $_GET['filter_year'] : (string)$currentYear;
-
-        return [
-            'year_options' => [
-                (string)$currentYear        => (string)$currentYear,
-                (string)($currentYear - 1)  => (string)($currentYear - 1)             
-            ],
-            'selected_year' => $selectedYear,
-        ];
-    }
+    
 
 
     // get all registration details for admin                         (1.REGISTRATION)
@@ -675,7 +664,7 @@ class AdminController
 
 
     // get all certificate generation details for admin view                         (7. CERTIFICATE GENERATION)
-    public function certificate_generates()
+ public function certificate_generates()
 {
     // Auth check
     if (!isset($_SESSION['user_id']) || $_SESSION['usertype'] != 'admin') {
@@ -712,6 +701,34 @@ class AdminController
     $content_file = __DIR__ . '/../views/admin/certificate_generates.php';
     require_once __DIR__ . '/../views/main.php';
 }
+public function getParticipantsByYear() {
+    if (!isset($_SESSION['user_id']) || $_SESSION['usertype'] != 'admin') {
+        echo json_encode(['error' => 'Unauthorized']);
+        exit;
+    }
+
+    header('Content-Type: application/json');
+    $year = isset($_GET['year']) ? (int)$_GET['year'] : (int)date('Y');
+    $model = new AdminModel();
+
+    echo json_encode([
+        'participants' => $model->getParticipants($year),
+        'coAuthors'    => $model->getCoAuthors($year)
+    ]);
+    exit;
+}
+public  function year_filter(){
+          $currentYear = (int)date('Y');
+        $selectedYear = isset($_GET['filter_year']) ? $_GET['filter_year'] : (string)$currentYear;
+
+        return [
+            'year_options' => [
+                (string)$currentYear        => (string)$currentYear,
+                (string)($currentYear - 1)  => (string)($currentYear - 1)             
+            ],
+            'selected_year' => $selectedYear,
+        ];
+    }
 
 
     // AJAX: Check if certificate already generated for a user and type

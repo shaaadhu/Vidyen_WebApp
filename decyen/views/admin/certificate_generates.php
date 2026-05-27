@@ -4,7 +4,7 @@
 <div class="content-wrapper">
     <div class="card shadow-lg">
         <div class="card-body">
-           <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3 gap-2">
+<!-- <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3 gap-2">
     <h4 class="card-title text-primary mb-0">Certificate Management</h4>
 
     <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">
@@ -21,6 +21,22 @@
             <?php endforeach; ?>
         </select>
     </form>
+</div> -->
+
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3 gap-2">
+    <h4 class="card-title text-primary mb-0">Certificate Management</h4>
+
+    <div class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">
+        <label for="filter_year" class="me-2 fw-bold text-secondary mb-0 small text-nowrap">Filter by Year:</label>
+        <select id="filter_year" class="form-select form-select-sm" style="width: 110px;" onchange="filterByYear(this.value)">
+            <?php foreach ($data['year_options'] as $val => $label): ?>
+                <option value="<?= htmlspecialchars($val) ?>"
+                    <?= ($data['selected_year'] === (string)$val) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($label) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 </div>
             <p class="card-description">
                 Generate certificates for participants
@@ -291,5 +307,100 @@ document.getElementById('certificateForm').addEventListener('submit', function(e
 window.addEventListener('load', function() {
     searchParticipants();
 });
+
+function filterByYear(year) {
+    document.getElementById('defaultTable').innerHTML = `
+        <tr><td colspan="5" class="text-center py-3">
+            <i class="fa-solid fa-spinner fa-spin"></i> Loading...
+        </td></tr>`;
+    document.getElementById('coAuthorTable').innerHTML = `
+        <tr><td colspan="5" class="text-center py-3">
+            <i class="fa-solid fa-spinner fa-spin"></i> Loading...
+        </td></tr>`;
+
+    // Changed URL to new dedicated AJAX action
+    fetch('index.php?controller=admin&action=getParticipantsByYear&year=' + year)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error:', data.error);
+                return;
+            }
+            renderParticipants(data.participants, data.coAuthors);
+            document.getElementById('selectAllCheckbox').checked = false;
+            updateCount();
+            searchParticipants();
+        })
+        .catch(err => {
+            console.error('Error fetching participants:', err);
+        });
+}
+
+function renderParticipants(participants, coAuthors) {
+    const certType = document.getElementById('certificate_type').value;
+
+    // Render default participants table
+    let defaultHtml = '';
+    if (participants.length > 0) {
+        participants.forEach(row => {
+            defaultHtml += `
+                <tr class="participant-row"
+                    data-regcode="${row.registration_code.toLowerCase()}"
+                    data-name="${(row.honorofic + ' ' + row.full_name).toLowerCase()}"
+                    data-email="${row.email.toLowerCase()}">
+                    <td><input type="checkbox" name="users[]" value="${row.registration_code}" class="user-checkbox" onchange="updateCount()"></td>
+                    <td>${row.registration_code}</td>
+                    <td>${row.honorofic} ${row.full_name}</td>
+                    <td>${row.email}</td>
+                    <td class="certificate-status" data-user="${row.registration_code}">
+                        <span class="badge badge-secondary">Select certificate type</span>
+                    </td>
+                </tr>`;
+        });
+    } else {
+        defaultHtml = '<tr><td colspan="5" class="text-center text-muted">No participants found.</td></tr>';
+    }
+    document.getElementById('defaultTable').innerHTML = defaultHtml;
+
+    // Render co-authors table
+    let coAuthorHtml = '';
+    if (coAuthors.length > 0) {
+        coAuthors.forEach(row => {
+            coAuthorHtml += `
+                <tr class="participant-row"
+                    data-regcode="${row.registration_id.toLowerCase()}"
+                    data-name="${row.full_name.toLowerCase()}"
+                    data-email="${row.author_email.toLowerCase()}">
+                    <td><input type="checkbox" name="users[]" value="${row.registration_id}" class="user-checkbox" onchange="updateCount()"></td>
+                    <td>${row.registration_id}</td>
+                    <td>${row.full_name}</td>
+                    <td>${row.author_email}</td>
+                    <td class="certificate-status" data-user="${row.registration_id}">
+                        <span class="badge badge-secondary">Select certificate type</span>
+                    </td>
+                </tr>`;
+        });
+    } else {
+        coAuthorHtml = '<tr><td colspan="5" class="text-center text-muted">No co-authors found.</td></tr>';
+    }
+    document.getElementById('coAuthorTable').innerHTML = coAuthorHtml;
+
+    // Restore correct table visibility based on current cert type
+    const coAuthorTable = document.getElementById('coAuthorTable');
+    const defaultTable  = document.getElementById('defaultTable');
+
+    if (certType === 'co_author_certificate') {
+        coAuthorTable.style.display = '';
+        defaultTable.style.display  = 'none';
+    } else {
+        coAuthorTable.style.display = 'none';
+        defaultTable.style.display  = '';
+    }
+
+    // Re-trigger status check if cert type already selected
+    if (certType) {
+        document.getElementById('certificate_type').dispatchEvent(new Event('change'));
+    }
+}
 </script>
 
