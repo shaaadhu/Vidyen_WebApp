@@ -1,10 +1,10 @@
 <div class="content-wrapper bg-light">
     <div class="col-12 grid-margin">
         <div class="card shadow-sm">
-<div class="card-title pt-3 ps-3 text-primary d-flex justify-content-between align-items-center pe-3">
+<div class="card-title pt-3 ps-3 text-primary d-flex flex-column flex-sm-row justify-content-between align-items-center pe-3 gap-2">
     <h3 class="mb-0">Assigned Abstract</h3>
 
-    <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">
+    <form method="GET" action="index.php" class="d-flex  align-items-center bg-white p-2 rounded shadow-sm border mb-0 gap-2">
         <input type="hidden" name="controller" value="reviewer">
         <input type="hidden" name="action" value="abstract_view"> 
         <label for="filter_year" class="me-2 fw-bold text-secondary mb-0 small text-nowrap">Filter by Year:</label>

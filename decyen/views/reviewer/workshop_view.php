@@ -6,7 +6,7 @@
             <!-- <div class="card-title p-3 text-primary">
                 <h3>Assigned Workshop Abstract</h3>
             </div> -->
-            <div class="card-title pt-3 ps-3 text-primary d-flex justify-content-between align-items-center pe-3">
+            <div class="card-title pt-3 ps-3 text-primary d-flex flex-column flex-sm-row justify-content-between align-items-center pe-3 gap-2">
     <h3 class="mb-0">Assigned Workshop Abstract</h3>
 
     <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">
