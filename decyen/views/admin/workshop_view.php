@@ -3,7 +3,7 @@
 <div class="content-wrapper bg-light">
     <div class="col-12 grid-margin">
         <div class="card shadow-lg">
-           <div class="card-title p-3 text-primary d-flex justify-content-between align-items-center">
+           <div class="card-title p-3 text-primary d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
     <h3 class="mb-0">Submitted Pre-Conference</h3>
 
     <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">

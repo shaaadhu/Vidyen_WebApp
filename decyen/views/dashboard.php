@@ -1,5 +1,5 @@
 <div class="content-wrapper bg-light p-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-4 gap-3">
         <h2 class="text-primary mb-0">Dashboard</h2>
         
         <?php if ($user_type == 'admin' || $user_type == 'reviewer'): ?>

@@ -4,40 +4,21 @@
 <div class="content-wrapper">
     <div class="card shadow-lg">
         <div class="card-body">
-<!-- <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3 gap-2">
-    <h4 class="card-title text-primary mb-0">Certificate Management</h4>
+        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3 gap-2">
+            <h4 class="card-title text-primary mb-0">Certificate Management</h4>
 
-    <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">
-        <input type="hidden" name="controller" value="admin">
-        <input type="hidden" name="action" value="certificate_generates"> 
-        <label for="filter_year" class="me-2 fw-bold text-secondary mb-0 small text-nowrap">Filter by Year:</label>
-        <select name="filter_year" id="filter_year" class="form-select form-select-sm"
-                style="width: 110px;" onchange="this.form.submit()">
-            <?php foreach ($data['year_options'] as $val => $label): ?>
-                <option value="<?= htmlspecialchars($val) ?>"
-                    <?= ($data['selected_year'] === (string)$val) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($label) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </form>
-</div> -->
-
-<div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3 gap-2">
-    <h4 class="card-title text-primary mb-0">Certificate Management</h4>
-
-    <div class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">
-        <label for="filter_year" class="me-2 fw-bold text-secondary mb-0 small text-nowrap">Filter by Year:</label>
-        <select id="filter_year" class="form-select form-select-sm" style="width: 110px;" onchange="filterByYear(this.value)">
-            <?php foreach ($data['year_options'] as $val => $label): ?>
-                <option value="<?= htmlspecialchars($val) ?>"
-                    <?= ($data['selected_year'] === (string)$val) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($label) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-</div>
+            <div class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">
+                <label for="filter_year" class="me-2 fw-bold text-secondary mb-0 small text-nowrap">Filter by Year:</label>
+                <select id="filter_year" class="form-select form-select-sm" style="width: 110px;" onchange="filterByYear(this.value)">
+                    <?php foreach ($data['year_options'] as $val => $label): ?>
+                        <option value="<?= htmlspecialchars($val) ?>"
+                            <?= ($data['selected_year'] === (string)$val) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($label) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
             <p class="card-description">
                 Generate certificates for participants
             </p>

@@ -7,10 +7,11 @@
         
         <div class="card shadow-lg">
             
-            <div class="card-title p-3 text-primary d-flex justify-content-between align-items-center">
-                    <h3>Participant List</h3>
+            <div class="card-title p-3 text-primary d-flex justify-content-between align-items-center gap-2">
+                    
 
-                    <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3 gap-2">
+                        <h3>Participant List</h3>
                         <form method="GET" action="index.php" class="d-flex align-items-center bg-white p-2 rounded shadow-sm border mb-0">
                             <input type="hidden" name="controller" value="admin">
                             <input type="hidden" name="action" value="admin_reg_view">
