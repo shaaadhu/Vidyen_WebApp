@@ -209,8 +209,8 @@ class AdminModel
             return "<span style='color: red;'><strong>Not Assigned</strong></span>";
         }
 
-        $label = ($status == 1) ? "Assigned" : "Reviewed";
-        $color = ($status == 1) ? "orange" : "green";
+        $label = ($status == 1) ? "Assigned" : (($status == 2) ? "Reviewed" : "Rejected");
+        $color = ($status == 1) ? "orange" : (($status == 2) ? "green" : "grey");
         $name = $reviewerName ?? "No reviewer assigned";
 
         return "<span style='color: $color;'><strong>$label</strong></span><br>$name";

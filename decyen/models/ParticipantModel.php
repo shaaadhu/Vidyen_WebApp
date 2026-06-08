@@ -266,7 +266,7 @@ class ParticipantModel
         $abstracts = [];
         while ($row = mysqli_fetch_assoc($result)) {
             // Business Logic: Determine status string here
-            $row['display_status'] = ($row['status'] == 2) ? "Evaluated" : "Not Evaluated";
+            $row['display_status'] = ($row['status'] == 2) ? "Evaluated" : (($row['status'] == 3) ? "Rejected" : "Not Evaluated");
             $abstracts[] = $row;
         }
         return $abstracts;
