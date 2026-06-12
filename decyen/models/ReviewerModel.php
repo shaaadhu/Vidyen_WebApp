@@ -18,7 +18,7 @@ class ReviewerModel {
         //  Check if it already exists
         $checkQuery = "SELECT id FROM conference_room 
                     WHERE name = '$session' 
-                        AND type = 'Scientific session rooms' 
+                        AND type = 'Scientific Session Rooms' 
                     LIMIT 1";
                     
         $checkResult = mysqli_query($this->conn, $checkQuery);
@@ -35,7 +35,7 @@ class ReviewerModel {
         // If it doesn't exist, run the INSERT query
         // NOTE: Change 'deleted', 'created_on' or other columns to match your table fields
         $insertQuery = "INSERT INTO conference_room (name, type,created_by,created_on) 
-                        VALUES ('$session', 'Scientific session rooms','admin','$currentDate')";
+                        VALUES ('$session', 'Scientific Session Rooms','admin','$currentDate')";
                         
         $insertResult = mysqli_query($this->conn, $insertQuery);
         
