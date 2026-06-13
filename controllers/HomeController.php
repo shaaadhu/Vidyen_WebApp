@@ -222,14 +222,19 @@ $config = $versionConfig[$version] ?? $versionConfig['1']; // fallback to 1
             $body = ob_get_clean();
 
             $mailService = new MailService();
-            $mailService->sendMail(
+            $mailSent = $mailService->sendMail(
                 $formData['email'],
                 $formData['full_name'],
                 "VIDYEN Conference Karnataka 2025 - Yenepoya Dental College",
                 $body
             );
 
-            echo "success";
+            if ($mailSent) {
+                echo "success";
+            } else {
+                error_log('MailService failed to send registration email to: ' . $formData['email']);
+                echo "error";
+            }
         } else {
             echo "error";
         }

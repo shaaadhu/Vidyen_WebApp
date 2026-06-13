@@ -358,6 +358,8 @@ $(document).on('submit', '#registration_vidyen_form', function(e) {
             type: "POST",
             data: $(this).serialize(),
             success: function(response) {
+                hideSpinner();
+                isSubmitting = false;
                 if (response.trim() == "success") {
                     alert(
                         "Thank you for registering with us. You will recive an email with further details including payment link. Kindly make the payment in order to complete your registration.");
@@ -365,6 +367,11 @@ $(document).on('submit', '#registration_vidyen_form', function(e) {
                 } else {
                     alert("Registration Failed. Please try again.");
                 }
+            },
+            error: function() {
+                hideSpinner();
+                isSubmitting = false;
+                alert("Registration Failed. Please try again.");
             }
         });
     } else {

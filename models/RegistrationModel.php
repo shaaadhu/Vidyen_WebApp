@@ -97,8 +97,8 @@ class RegistrationModel
             return mysqli_query($this->db, $query_login);
         }else {
     // This will print the error to your Network Tab
-    die(mysqli_error($this->db)); 
-}
+         die(mysqli_error($this->db)); 
+         }
         return false;
     }
 
