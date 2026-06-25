@@ -32,7 +32,7 @@ class ParticipantModel
         $submissions = [];
         while ($row = mysqli_fetch_assoc($result)) {
             // Logic moved from View to Model
-            $row['display_status'] = ($row['status'] == 2) ? "Evaluated" : "Not Evaluated";
+            $row['display_status'] = ($row['status'] == 2) ? "Evaluated" : (($row['status'] == 3) ? "Rejected" : "Not Evaluated");
             $submissions[] = $row;
         }
         return $submissions;
@@ -70,20 +70,30 @@ class ParticipantModel
         return mysqli_fetch_all($res, MYSQLI_ASSOC);
     }
 
-    // Generate unique pre-conference ID
+   
     public function generatePreConferenceId()
-    {
-        $query = "SELECT MAX(pre_confernce_id) as last_id FROM pre_conference";
-        $result = mysqli_query($this->conn, $query);
-        $data = mysqli_fetch_assoc($result);
+{
+    $year = date('Y');
+    $prefix = 'PRE' . $year;
 
-        if (!$data['last_id']) {
-            return 'PRE0001';
-        }
+    $query = "SELECT pre_confernce_id
+              FROM pre_conference
+              WHERE pre_confernce_id LIKE '$prefix%'
+              ORDER BY pre_confernce_id DESC
+              LIMIT 1";
 
-        $last_id = $data['last_id'];
-        return ++$last_id; // PHP increments string-based numbers automatically
+    $result = mysqli_query($this->conn, $query);
+    $data = mysqli_fetch_assoc($result);
+
+    if (!$data) {
+        return $prefix . '01';
     }
+
+    $lastNumber = (int)substr($data['pre_confernce_id'], strlen($prefix));
+    $nextNumber = $lastNumber + 1;
+
+    return $prefix . str_pad($nextNumber, 2, '0', STR_PAD_LEFT);
+}
 
    
     //   Saves both the submission and the author details
@@ -161,7 +171,7 @@ class ParticipantModel
         $data = [];
         while ($row = mysqli_fetch_assoc($result)) {
             // Logic moved from HTML to Model
-            $row['display_status'] = ($row['status'] == 2) ? "Evaluated" : "Not Evaluated";
+            $row['display_status'] = ($row['status'] == 2) ? "Evaluated" : (($row['status'] == 3) ? "Rejected" : "Not Evaluated");
             $data[] = $row;
         }
         return $data;
@@ -175,20 +185,31 @@ class ParticipantModel
         return mysqli_fetch_assoc($res);
     }
 
-    // Generate unique workshop ID
+    
+
     public function generateWorkshopId()
-    {
-        $query = "SELECT MAX(workshop_id) as last_id FROM workshop";
-        $result = mysqli_query($this->conn, $query);
-        $data = mysqli_fetch_assoc($result);
+{
+    $year = date('Y');
+    $prefix = 'WRK' . $year;
 
-        if (!$data['last_id']) {
-            return 'WRK0001';
-        }
+    $query = "SELECT workshop_id
+              FROM workshop
+              WHERE workshop_id LIKE '$prefix%'
+              ORDER BY workshop_id DESC
+              LIMIT 1";
 
-        $last_id = $data['last_id'];
-        return ++$last_id; // PHP increments string-based numbers automatically
+    $result = mysqli_query($this->conn, $query);
+    $data = mysqli_fetch_assoc($result);
+
+    if (!$data) {
+        return $prefix . '01';
     }
+
+    $lastNumber = (int)substr($data['workshop_id'], strlen($prefix));
+    $nextNumber = $lastNumber + 1;
+
+    return $prefix . str_pad($nextNumber, 2, '0', STR_PAD_LEFT);
+}
 
     // Saves both the workshop submission and the author details
     public function saveWorkshopSubmission($mainData, $authorData)
@@ -281,20 +302,35 @@ class ParticipantModel
         return mysqli_fetch_assoc($res);
     }
 
-    // Generate unique abstract ID
+
+
     public function generateAbstractId()
-    {
-        $query = "SELECT MAX(abstract_id) as last_id FROM abstract";
-        $result = mysqli_query($this->conn, $query);
-        $data = mysqli_fetch_assoc($result);
+{
+    $year = date('Y');
+    $prefix = 'AUT' . $year;
 
-        if (!$data['last_id']) {
-            return 'AUT000001';
-        }
+    $query = "SELECT abstract_id
+              FROM abstract
+              WHERE abstract_id LIKE '$prefix%'
+              ORDER BY abstract_id DESC
+              LIMIT 1";
 
-        $last_id = $data['last_id'];
-        return ++$last_id; // PHP increments string-based numbers automatically
+    $result = mysqli_query($this->conn, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    if (!$row) {
+        return $prefix . '01';
     }
+
+    $lastId = $row['abstract_id'];
+
+    // Extract sequence after AUTYYYY
+    $lastNumber = (int)substr($lastId, strlen($prefix));
+
+    $newNumber = $lastNumber + 1;
+
+    return $prefix . str_pad($newNumber, 2, '0', STR_PAD_LEFT);
+}
 
     // fetch count of abstracts submitted for a specific type and subtheme
     public function getSubmissionCount($type, $subtheme)

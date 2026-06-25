@@ -5,10 +5,10 @@
 <table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
 <tr>
   <td style="text-align: center;color: #ffffff;background-color: #1d2d77;width: 60%;font-family: Montserrat;">
-    <h1 style="color:#ffff;">VIDYEN 3.0 </h1>
+    <h1 style="color:#ffff;">VIDYEN 4.0 </h1>
   </td>
   <td style="text-align: center;font-family: Montserrat;border: solid 2px;padding-top: 20px;">
-    <h1>CONFERENCE<br> 2025</h1>
+    <h1>CONFERENCE<br> 2026</h1>
   </td>
 </tr>
 </table>
@@ -147,7 +147,7 @@
     Registration Committee
   </p>
   <p style="font-family: Montserrat;font-weight: bold;">
-    VIDYEN 3.0, 2025
+    VIDYEN 4.0, 2026
   </p>
 </td>
 </tr>

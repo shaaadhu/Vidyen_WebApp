@@ -152,6 +152,7 @@ class ReviewerController
 
             $abstractCode = $_POST['abstract_code'] ?? '';
             $comment = $_POST['comment'] ?? '';
+            $decision = $_POST['decision'] ?? 'accept';
 
 
             if (empty($abstractCode) || empty($comment)) {
@@ -167,7 +168,7 @@ class ReviewerController
             }
             
             $model = new ReviewerModel();
-            $result = $model->submitPreConferenceEvaluation($abstractCode, $comment);
+            $result = $model->submitPreConferenceEvaluation($abstractCode, $comment, $decision);
 
             // 4. Return Response
             if ($result) {
@@ -240,6 +241,7 @@ class ReviewerController
             // 2. Capture and validate input
             $workshopId = $_POST['workshop_id'] ?? ''; // or 'abstract_code' based on your form
             $comment = $_POST['comment'] ?? '';
+            $decision = $_POST['decision'] ?? 'accept';
 
             if (empty($workshopId) || empty($comment)) {
                 echo "Missing required information";
@@ -253,7 +255,7 @@ class ReviewerController
 
             // 3. Model Logic
             $model = new ReviewerModel();
-            $result = $model->submitWorkshopEvaluation($workshopId, $comment);
+            $result = $model->submitWorkshopEvaluation($workshopId, $comment, $decision);
 
             // 4. Return Response
             if ($result) {

@@ -136,7 +136,7 @@ class ReviewerModel {
     }
 
      // save PreConference evaluation
-    public function submitPreConferenceEvaluation($abstractCode, $comment) {
+    public function submitPreConferenceEvaluation($abstractCode, $comment, $decision = 'accept') {
         // Start Transaction
         mysqli_begin_transaction($this->conn);
 
@@ -146,9 +146,12 @@ class ReviewerModel {
             mysqli_stmt_bind_param($stmt1, "ss", $comment, $abstractCode);
             mysqli_stmt_execute($stmt1);
 
-            // 2. Update pre_conference table status to 'Evaluated' (2)
-            $stmt2 = mysqli_prepare($this->conn, "UPDATE pre_conference SET status = 2 WHERE pre_confernce_id = ?");
-            mysqli_stmt_bind_param($stmt2, "s", $abstractCode);
+            // 2. Determine status based on decision
+            $status = ($decision === 'accept') ? 2 : 3;
+
+            // 3. Update pre_conference table status (2 = Evaluated, 3 = Rejected)
+            $stmt2 = mysqli_prepare($this->conn, "UPDATE pre_conference SET status = ? WHERE pre_confernce_id = ?");
+            mysqli_stmt_bind_param($stmt2, "is", $status, $abstractCode);
             mysqli_stmt_execute($stmt2);
 
             // Commit changes
@@ -185,7 +188,7 @@ class ReviewerModel {
     }
 
      // save Workshop evaluation
-    public function submitWorkshopEvaluation($workshopId, $comment) {
+    public function submitWorkshopEvaluation($workshopId, $comment, $decision = 'accept') {
         // Start Transaction
         mysqli_begin_transaction($this->conn);
 
@@ -195,9 +198,12 @@ class ReviewerModel {
             mysqli_stmt_bind_param($stmt1, "ss", $comment, $workshopId);
             mysqli_stmt_execute($stmt1);
 
-            // 2. Update workshop table status to 'Evaluated' (2)
-            $stmt2 = mysqli_prepare($this->conn, "UPDATE workshop SET status = 2 WHERE workshop_id = ?");
-            mysqli_stmt_bind_param($stmt2, "s", $workshopId);
+            // 2. Determine status based on decision
+            $status = ($decision === 'accept') ? 2 : 3;
+
+            // 3. Update workshop table status (2 = Evaluated, 3 = Rejected)
+            $stmt2 = mysqli_prepare($this->conn, "UPDATE workshop SET status = ? WHERE workshop_id = ?");
+            mysqli_stmt_bind_param($stmt2, "is", $status, $workshopId);
             mysqli_stmt_execute($stmt2);
 
             // Commit all changes

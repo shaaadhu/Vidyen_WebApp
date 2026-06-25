@@ -35,6 +35,19 @@
     </div>
 
     <div class="mt-3">
+        <label><b>Evaluation Decision</b></label>
+        <input type="hidden" name="decision" id="decisionInput" value="accept">
+        <div class="d-flex gap-2 mt-1">
+            <button type="button" id="btnAccept" class="btn btn-dark btn-sm" onclick="setDecision('accept')">
+                <i class="fa-solid fa-circle-check"></i> Accept
+            </button>
+            <button type="button" id="btnReject" class="btn btn-outline-dark btn-sm" onclick="setDecision('reject')">
+                <i class="fa-solid fa-circle-xmark"></i> Reject
+            </button>
+        </div>
+    </div>
+
+    <div class="mt-3">
         <label><b>Add Review Comments</b></label>                
         <textarea class="form-control" rows="5" name="comment" required placeholder="Type your evaluation here..."></textarea>
     </div>
@@ -46,11 +59,22 @@
 </form>
 
 <script type="text/javascript">
+function setDecision(value) {
+    document.getElementById('decisionInput').value = value;
+    if (value === 'accept') {
+        document.getElementById('btnAccept').className = 'btn btn-dark btn-sm';
+        document.getElementById('btnReject').className = 'btn btn-outline-dark btn-sm';
+    } else {
+        document.getElementById('btnAccept').className = 'btn btn-outline-dark btn-sm';
+        document.getElementById('btnReject').className = 'btn btn-dark btn-sm';
+    }
+}
+
 $('#add_comment_workshop_form').on('submit', function (e) {
     e.preventDefault();
     $.ajax({
         method: "POST",
-        url: "index.php?controller=reviewer&action=save_workshop_comment", // New MVC Route
+        url: "index.php?controller=reviewer&action=save_workshop_comment",
         data: $(this).serialize(),
         success: function (data) {
             alert("Successfully Reviewed");

@@ -40,13 +40,17 @@
 							<?php $i = 1;
 							while ($row = mysqli_fetch_array($result)) {
 								$status = $row['status'];
+								$status_text = "Not Assigned";
+								$status_color = "#999999";
 								if ($status == '1') {
-									$status = "Assigned";
-									// code...
+									$status_text = "Assigned";
+									$status_color = "#FF9800";
 								} else if ($status == '2') {
-									$status = "Reviewed";
-								} else {
-									$status = "Not Assigned";
+									$status_text = "Evaluated";
+									$status_color = "#4CAF50";
+								} else if ($status == '3') {
+									$status_text = "Rejected";
+									$status_color = "#F44336";
 								}
 							?>
 								<tr>
@@ -54,7 +58,7 @@
 									<td><?php echo $row['registration_id']; ?></td>
 									<td><?php echo $row['pre_confernce_id']; ?></td>
 									<td style="word-wrap: break-word;white-space: normal;max-width: 200px;"><?php echo $row['title_paper']; ?></td>
-									<td class="tdtest"><?php echo $status; ?></td>
+									<td class="tdtest"><span style="color: <?php echo $status_color; ?>; font-weight: bold;"><?php echo $status_text; ?></span></td>
 									<td><a class="btn btn-outline-primary" href="index.php?controller=admin&action=preconference_viewDetails&id=<?php echo $row['pre_confernce_id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="View">View</a>
 									</td>
 

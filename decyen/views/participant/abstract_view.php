@@ -27,7 +27,23 @@
                                         <td style="word-wrap: break-word; white-space: normal; max-width: 200px;">
                                             <?= htmlspecialchars($abstract['paper_title']) ?>
                                         </td>
-                                        <td><?= $abstract['display_status'] ?></td>
+                                        <td>
+                                            <?php 
+                                                $color = '#999999';
+                                                $text = 'Not Assigned';
+                                                if ($abstract['status'] == 1) {
+                                                    $color = '#FF9800';
+                                                    $text = 'Assigned';
+                                                } else if ($abstract['status'] == 2) {
+                                                    $color = '#4CAF50';
+                                                    $text = 'Evaluated';
+                                                } else if ($abstract['status'] == 3) {
+                                                    $color = '#F44336';
+                                                    $text = 'Rejected';
+                                                }
+                                            ?>
+                                            <span style="color: <?= $color; ?>; font-weight: bold;"><?= $text; ?></span>
+                                        </td>
                                         <td>
                                             <a class="btn btn-outline-primary" 
                                                href="index.php?controller=participant&action=abstract_details&id=<?= $abstract['abstract_id'] ?>">

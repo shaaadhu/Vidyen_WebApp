@@ -27,7 +27,23 @@
                                         <td style="word-wrap: break-word; white-space: normal; max-width: 200px;">
                                             <?= htmlspecialchars($row['title_paper']) ?>
                                         </td>
-                                        <td><?= $row['display_status'] ?></td>
+                                        <td>
+                                            <?php 
+                                                $color = '#999999';
+                                                $text = 'Not Assigned';
+                                                if ($row['status'] == 1) {
+                                                    $color = '#FF9800';
+                                                    $text = 'Assigned';
+                                                } else if ($row['status'] == 2) {
+                                                    $color = '#4CAF50';
+                                                    $text = 'Evaluated';
+                                                } else if ($row['status'] == 3) {
+                                                    $color = '#F44336';
+                                                    $text = 'Rejected';
+                                                }
+                                            ?>
+                                            <span style="color: <?= $color; ?>; font-weight: bold;"><?= $text; ?></span>
+                                        </td>
                                         <td class="text-center">
                                             <a class="btn btn-outline-primary" 
                                                href="index.php?controller=participant&action=preconference_details&id=<?= $row['pre_confernce_id'] ?>">

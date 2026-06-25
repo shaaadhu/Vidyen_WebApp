@@ -44,7 +44,23 @@
                                 <td style="word-wrap: break-word; white-space: normal; max-width: 200px;">
                                     <?= htmlspecialchars($workshop['title_paper']); ?>
                                 </td>
-                                <td class="tdtest"><?= $workshop['status_text']; ?></td>
+                                <td class="tdtest">
+                                    <?php 
+                                        $color = '#999999';
+                                        $text = 'Not Assigned';
+                                        if ($workshop['status'] == 1) {
+                                            $color = '#FF9800';
+                                            $text = 'Assigned';
+                                        } else if ($workshop['status'] == 2) {
+                                            $color = '#4CAF50';
+                                            $text = 'Evaluated';
+                                        } else if ($workshop['status'] == 3) {
+                                            $color = '#F44336';
+                                            $text = 'Rejected';
+                                        }
+                                    ?>
+                                    <span style="color: <?= $color; ?>; font-weight: bold;"><?= $text; ?></span>
+                                </td>
                                 <td>
                                     <a class="btn btn-outline-primary" 
                                        href="index.php?controller=admin&action=workshop_details&id=<?= $workshop['workshop_id']; ?>" 
